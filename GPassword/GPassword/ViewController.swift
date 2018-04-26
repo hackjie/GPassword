@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        GPassword.config { (options) in
+            options.connectionLineColor = .blue
+        }
+        view.backgroundColor = LockManager.default.lockOptions.connectionLineColor
     }
 
     override func didReceiveMemoryWarning() {

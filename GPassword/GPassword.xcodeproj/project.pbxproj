@@ -13,6 +13,8 @@
 		B685CBFC2091B9470072C4E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B685CBFB2091B9470072C4E7 /* Assets.xcassets */; };
 		B685CBFF2091B9470072C4E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B685CBFD2091B9470072C4E7 /* LaunchScreen.storyboard */; };
 		B685CC082091B9550072C4E7 /* GPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC072091B9550072C4E7 /* GPassword.swift */; };
+		B685CC0C2091CD3F0072C4E7 /* LockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0B2091CD3F0072C4E7 /* LockManager.swift */; };
+		B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0D2091CF050072C4E7 /* LockOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B685CBFE2091B9470072C4E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B685CC002091B9470072C4E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B685CC072091B9550072C4E7 /* GPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPassword.swift; sourceTree = "<group>"; };
+		B685CC0B2091CD3F0072C4E7 /* LockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockManager.swift; sourceTree = "<group>"; };
+		B685CC0D2091CF050072C4E7 /* LockOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +74,20 @@
 		B685CC062091B9550072C4E7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B685CC0A2091C5CD0072C4E7 /* Core */,
 				B685CC072091B9550072C4E7 /* GPassword.swift */,
 			);
 			name = Source;
 			path = ../Source;
+			sourceTree = "<group>";
+		};
+		B685CC0A2091C5CD0072C4E7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B685CC0D2091CF050072C4E7 /* LockOptions.swift */,
+				B685CC0B2091CD3F0072C4E7 /* LockManager.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,8 +162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B685CC0C2091CD3F0072C4E7 /* LockManager.swift in Sources */,
 				B685CC082091B9550072C4E7 /* GPassword.swift in Sources */,
 				B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */,
+				B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */,
 				B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

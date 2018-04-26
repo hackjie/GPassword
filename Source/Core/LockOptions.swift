@@ -24,15 +24,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
+import UIKit
 
-public typealias ConfigOptionsCompletion = (_ options: LockOptions) -> Void
+public class LockOptions {
+    /// line connect lock items
+    public var connectionLineColor = UIColor.black
 
-/// config lock view properties. eg: color title...
-///
-/// - Parameter config: ConfigOptionsCompletion
-public func config(_ config: ConfigOptionsCompletion) {
-    config(LockManager.default.lockOptions)
+
 }
-
-
