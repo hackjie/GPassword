@@ -26,13 +26,13 @@
 
 import Foundation
 
+public let globalOptions = LockManager.default.lockOptions
+
 public typealias ConfigOptionsCompletion = (_ options: LockOptions) -> Void
 
 /// config lock view properties. eg: color title...
 ///
 /// - Parameter config: ConfigOptionsCompletion
 public func config(_ config: ConfigOptionsCompletion) {
-    config(LockManager.default.lockOptions)
+    config(globalOptions)
 }
-
-

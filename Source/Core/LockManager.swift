@@ -27,6 +27,7 @@
 import Foundation
 
 open class LockManager {
+
     // MARK: - Properties
     open var lockOptions = LockOptions()
 

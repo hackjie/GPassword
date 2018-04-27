@@ -26,9 +26,27 @@
 
 import UIKit
 
+/// LockOptions is options for user to adjust something about UI.
+/// call GPassword.config to config global
 public class LockOptions {
-    /// line connect lock items
+
+    /// Line connect lock items
     public var connectionLineColor = UIColor.black
 
+    /// Point context line width
+    public var pointLineWidth: CGFloat = 1.0
 
+    public var pointBackgroundColor: UIColor = .white
+
+    /// Point inner circle selected color
+    public var innerSelectedColor: UIColor = .blue
+
+    /// Point inner circle normal color
+    public var innerNormalColor: UIColor = .lightGray
+
+    /// Point outer circle selected color
+    public var outerSelectedColor: UIColor = UIColor(gpRGB: 0xF6D05F, alpha: 0.5)
+
+    /// Point inner circle scale of Point
+    public var scale: CGFloat = 0.3
 }
