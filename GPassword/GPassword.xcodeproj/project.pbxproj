@@ -17,6 +17,7 @@
 		B685CC082091B9550072C4E7 /* GPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC072091B9550072C4E7 /* GPassword.swift */; };
 		B685CC0C2091CD3F0072C4E7 /* LockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0B2091CD3F0072C4E7 /* LockManager.swift */; };
 		B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0D2091CF050072C4E7 /* LockOptions.swift */; };
+		B6E79DD82094567C00DB69B5 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E79DD72094567C00DB69B5 /* Box.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B685CC072091B9550072C4E7 /* GPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPassword.swift; sourceTree = "<group>"; };
 		B685CC0B2091CD3F0072C4E7 /* LockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockManager.swift; sourceTree = "<group>"; };
 		B685CC0D2091CF050072C4E7 /* LockOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
+		B6E79DD72094567C00DB69B5 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				B685CC0D2091CF050072C4E7 /* LockOptions.swift */,
 				B685CC0B2091CD3F0072C4E7 /* LockManager.swift */,
 				B662A3022092FC3100C7418F /* Point.swift */,
+				B6E79DD72094567C00DB69B5 /* Box.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				B662A308209339E100C7418F /* Extensions.swift in Sources */,
 				B662A3032092FC3100C7418F /* Point.swift in Sources */,
 				B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */,
+				B6E79DD82094567C00DB69B5 /* Box.swift in Sources */,
 				B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */,
 				B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */,
 			);
