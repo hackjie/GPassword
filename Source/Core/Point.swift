@@ -37,8 +37,10 @@ class Point: UIView {
 
     /// Contain infos to draw
     struct DrawBag {
-        let color: UIColor
+        let fillColor: UIColor
         let rect: CGRect
+        let stroke: Bool
+        let strokeColor: UIColor
     }
 
     /// Selected state call setNeedsDisplay
@@ -53,8 +55,10 @@ class Point: UIView {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = DrawBag(color: globalOptions.innerSelectedColor,
-                            rect: rect)
+        let inner = DrawBag(fillColor: globalOptions.innerSelectedColor,
+                            rect: rect,
+                            stroke: globalOptions.isInnerStroke,
+                            strokeColor: globalOptions.innerStrokeColor)
         return inner
     }()
 
@@ -63,18 +67,22 @@ class Point: UIView {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = DrawBag(color: globalOptions.innerNormalColor,
-                            rect: rect)
+        let inner = DrawBag(fillColor: globalOptions.innerNormalColor,
+                            rect: rect,
+                            stroke: globalOptions.isInnerStroke,
+                            strokeColor: globalOptions.innerStrokeColor)
         return inner
     }()
 
     /// Contain draw infos of outer circle selected
     private lazy var outerSelected: DrawBag = {
-        let sizeWH = bounds.width - globalOptions.pointLineWidth
-        let originXY = globalOptions.pointLineWidth * 0.5
+        let sizeWH = bounds.width - 2*globalOptions.pointLineWidth
+        let originXY = globalOptions.pointLineWidth
         let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
-        let outer = DrawBag(color: globalOptions.outerSelectedColor,
-                            rect: rect)
+        let outer = DrawBag(fillColor: globalOptions.outerSelectedColor,
+                            rect: rect,
+                            stroke: globalOptions.isOuterStroke,
+                            strokeColor: globalOptions.outerStrokeColor)
         return outer
     }()
 
@@ -112,10 +120,12 @@ class Point: UIView {
     ///   - context: CGContext
     ///   - circle: DrawBag
     private func draw(_ context: CGContext, _ circle: DrawBag) {
-        let path = CGMutablePath()
-        path.addEllipse(in: circle.rect)
-        context.addPath(path)
-        circle.color.set()
+        context.addEllipse(in: circle.rect)
+        circle.fillColor.set()
         context.fillPath()
+        if circle.stroke {
+            context.setStrokeColor(circle.strokeColor.cgColor)
+            context.strokeEllipse(in: circle.rect)
+        }
     }
 }

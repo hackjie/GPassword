@@ -14,9 +14,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         GPassword.config { (options) in
-            options.connectionLineColor = .white
+            options.isInnerStroke = false
+            options.isOuterStroke = false
         }
-        view.backgroundColor = LockManager.default.lockOptions.connectionLineColor
 
         let point = Point.init(frame: CGRect.init(x: 40, y: 100, width: 80, height: 80))
         view.addSubview(point)

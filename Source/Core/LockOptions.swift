@@ -30,7 +30,7 @@ import UIKit
 /// call GPassword.config to config global
 public class LockOptions {
 
-    /// Line connect lock items
+    /// Line connect points
     public var connectionLineColor = UIColor.black
 
     /// Point context line width
@@ -49,4 +49,16 @@ public class LockOptions {
 
     /// Point inner circle scale of Point
     public var scale: CGFloat = 0.3
+
+    /// Point inner circle whether draw stroke, width according to pointLineWidth
+    public var isInnerStroke: Bool = false
+
+    /// Point outer circle whether draw stroke, width according to pointLineWidth
+    public var isOuterStroke: Bool = false
+
+    /// Point inner circle draw stroke color
+    public var innerStrokeColor: UIColor = .red
+
+    /// Point outer circle draw stroke color
+    public var outerStrokeColor: UIColor = .red
 }
