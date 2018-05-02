@@ -6,6 +6,8 @@
 //  Copyright © 2018年 leoli. All rights reserved.
 //
 
+let GWidth = UIScreen.main.bounds.width
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,12 +16,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         GPassword.config { (options) in
-            options.isInnerStroke = true
+            options.isInnerStroke = false
             options.isOuterStroke = false
         }
 
-        let point = Point.init(frame: CGRect.init(x: 40, y: 100, width: 80, height: 80))
-        view.addSubview(point)
+        let box = Box(frame: CGRect(x: globalOptions.pointSpace, y: 100, width: UIScreen.main.bounds.width - 2 * globalOptions.pointSpace, height: 400))
+        view.addSubview(box)
     }
 
     override func didReceiveMemoryWarning() {
