@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         GPassword.config { (options) in
-            options.isInnerStroke = false
+            options.isInnerStroke = true
             options.isOuterStroke = false
         }
 
