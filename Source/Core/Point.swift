@@ -44,9 +44,20 @@ class Point: UIView {
     }
 
     /// Selected state call setNeedsDisplay
-    public var selected: Bool = true {
+    var selected: Bool = false {
         willSet {
             setNeedsDisplay()
+        }
+    }
+
+    fileprivate var angle: CGFloat?
+
+    var direct: Direct? {
+        willSet {
+            if let value = newValue {
+                angle = CGFloat(Double.pi / 4) * CGFloat(value.rawValue - 1)
+                setNeedsDisplay()
+            }
         }
     }
 
@@ -68,6 +79,18 @@ class Point: UIView {
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
         let inner = DrawBag(fillColor: globalOptions.innerNormalColor,
+                            rect: rect,
+                            stroke: globalOptions.isInnerStroke,
+                            strokeColor: globalOptions.innerStrokeColor)
+        return inner
+    }()
+
+    /// Contain draw infos of inner circle normal
+    private lazy var innerTriangle: DrawBag = {
+        let rectWH = bounds.width * globalOptions.scale
+        let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
+        let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
+        let inner = DrawBag(fillColor: globalOptions.triangleColor,
                             rect: rect,
                             stroke: globalOptions.isInnerStroke,
                             strokeColor: globalOptions.innerStrokeColor)
@@ -101,13 +124,15 @@ class Point: UIView {
     /// - Parameter rect: CGRect
     override func draw(_ rect: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
-            // TODO: 旋转
-
+            transform(context, rect: rect)
             // context options
             context.setLineWidth(LockManager.default.lockOptions.pointLineWidth)
             if selected {
                 draw(context, innerSelected)
                 draw(context, outerSelected)
+                if globalOptions.isDrawTriangle {
+                    drawTriangle(context, innerTriangle)
+                }
             } else {
                 draw(context, innerNormal)
             }
@@ -127,5 +152,42 @@ class Point: UIView {
             context.setStrokeColor(circle.strokeColor.cgColor)
             context.strokeEllipse(in: circle.rect)
         }
+    }
+
+    /// transform context to draw triangle then transform back
+    ///
+    /// - Parameters:
+    ///   - context: CGContext
+    ///   - rect: CGRect
+    func transform(_ context: CGContext, rect: CGRect) {
+        let translateXY = rect.width * 0.5
+        context.translateBy(x: translateXY, y: translateXY)
+        context.rotate(by: angle ?? 0)
+        context.translateBy(x: -translateXY, y: -translateXY)
+    }
+
+    /// draw triangle
+    ///
+    /// - Parameters:
+    ///   - context: CGContext
+    ///   - circle: DrawBag
+    func drawTriangle(_ context: CGContext, _ circle: DrawBag) {
+        if direct == nil {
+            return
+        }
+        let trianglePathM = CGMutablePath()
+        let width = globalOptions.triangleWidth
+        let height = globalOptions.triangleHeight
+        let topX = circle.rect.minX + circle.rect.width * 0.5
+        let topY = circle.rect.minY + (circle.rect.width * 0.5 - height - globalOptions.offsetInnerCircleAndTriangle - circle.rect.height * 0.5)
+        trianglePathM.move(to: CGPoint(x: topX, y: topY))
+        let leftPointX = topX - width * 0.5
+        let leftPointY = topY + height
+        trianglePathM.addLine(to: CGPoint(x: leftPointX, y: leftPointY))
+        let rightPointX = topX + width * 0.5
+        trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
+        context.addPath(trianglePathM)
+        circle.fillColor.set()
+        context.fillPath()
     }
 }

@@ -33,8 +33,11 @@ public class LockOptions {
     /// Box background color
     public var boxBackgroundColor: UIColor = .white
 
-    /// Line connect points
-    public var connectionLineColor = UIColor.black
+    /// Line connect points color
+    public var connectLineColor: UIColor = .black
+
+    /// Line connect points width
+    public var connectLineWidth: CGFloat = 2
 
     /// Point context line width
     public var pointLineWidth: CGFloat = 1.0
@@ -68,4 +71,18 @@ public class LockOptions {
 
     /// Space between points
     public var pointSpace: CGFloat = 24.0
+
+    /// Point inner circle whether draw triangle
+    public var isDrawTriangle: Bool = false
+
+    /// Triangle background color
+    public var triangleColor: UIColor = .blue
+
+    /// Triangle width
+    public var triangleWidth: CGFloat = 10
+
+    /// Triangle height
+    public var triangleHeight: CGFloat = 7
+
+    public var offsetInnerCircleAndTriangle: CGFloat = 4
 }

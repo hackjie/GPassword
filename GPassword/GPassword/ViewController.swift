@@ -16,8 +16,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         GPassword.config { (options) in
-            options.isInnerStroke = true
+            options.isInnerStroke = false
             options.isOuterStroke = false
+            options.isDrawTriangle = true
         }
 
         let box = Box(frame: CGRect(x: globalOptions.pointSpace, y: 100, width: UIScreen.main.bounds.width - 2 * globalOptions.pointSpace, height: 400))
