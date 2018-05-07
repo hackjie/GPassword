@@ -35,8 +35,13 @@ class Point: UIView {
         case top = 1, rightTop, right, rightBottom, bottom, leftBottom, left, leftTop
     }
 
+    public enum DrawType: Int {
+        case innerNormal, innerSelected, outerSelected, triangle
+    }
+
     /// Contain infos to draw
     struct DrawBag {
+        let type: DrawType
         let fillColor: UIColor
         let rect: CGRect
         let stroke: Bool
@@ -50,8 +55,10 @@ class Point: UIView {
         }
     }
 
+    /// Angle used to draw triangle when isDrawTriangle is true
     fileprivate var angle: CGFloat?
 
+    /// Draw direct
     var direct: Direct? {
         willSet {
             if let value = newValue {
@@ -61,24 +68,26 @@ class Point: UIView {
         }
     }
 
-    /// Contain draw infos of inner circle selected
-    private lazy var innerSelected: DrawBag = {
+    /// Contain draw infos of inner circle normal
+    private lazy var innerNormal: DrawBag = {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = DrawBag(fillColor: globalOptions.innerSelectedColor,
+        let inner = DrawBag(type: .innerNormal,
+                            fillColor: globalOptions.innerNormalColor,
                             rect: rect,
                             stroke: globalOptions.isInnerStroke,
                             strokeColor: globalOptions.innerStrokeColor)
         return inner
     }()
 
-    /// Contain draw infos of inner circle normal
-    private lazy var innerNormal: DrawBag = {
+    /// Contain draw infos of inner circle selected
+    private lazy var innerSelected: DrawBag = {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = DrawBag(fillColor: globalOptions.innerNormalColor,
+        let inner = DrawBag(type: .innerSelected,
+                            fillColor: globalOptions.innerSelectedColor,
                             rect: rect,
                             stroke: globalOptions.isInnerStroke,
                             strokeColor: globalOptions.innerStrokeColor)
@@ -90,7 +99,8 @@ class Point: UIView {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = DrawBag(fillColor: globalOptions.triangleColor,
+        let inner = DrawBag(type: .triangle,
+                            fillColor: globalOptions.triangleColor,
                             rect: rect,
                             stroke: globalOptions.isInnerStroke,
                             strokeColor: globalOptions.innerStrokeColor)
@@ -99,10 +109,11 @@ class Point: UIView {
 
     /// Contain draw infos of outer circle selected
     private lazy var outerSelected: DrawBag = {
-        let sizeWH = bounds.width - 2*globalOptions.pointLineWidth
+        let sizeWH = bounds.width - 2 * globalOptions.pointLineWidth
         let originXY = globalOptions.pointLineWidth
         let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
-        let outer = DrawBag(fillColor: globalOptions.outerSelectedColor,
+        let outer = DrawBag(type: .outerSelected,
+                            fillColor: globalOptions.outerSelectedColor,
                             rect: rect,
                             stroke: globalOptions.isOuterStroke,
                             strokeColor: globalOptions.outerStrokeColor)
@@ -126,7 +137,7 @@ class Point: UIView {
         if let context = UIGraphicsGetCurrentContext() {
             transform(context, rect: rect)
             // context options
-            context.setLineWidth(LockManager.default.lockOptions.pointLineWidth)
+            context.setLineWidth(globalOptions.pointLineWidth)
             if selected {
                 draw(context, innerSelected)
                 draw(context, outerSelected)

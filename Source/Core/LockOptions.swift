@@ -84,5 +84,6 @@ public class LockOptions {
     /// Triangle height
     public var triangleHeight: CGFloat = 7
 
+    /// Offset between inner circle and triangle
     public var offsetInnerCircleAndTriangle: CGFloat = 4
 }

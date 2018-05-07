@@ -42,6 +42,8 @@ class Box: UIView {
             let point = Point()
             addSubview(point)
         }
+
+        setupSubViews()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,8 +51,7 @@ class Box: UIView {
     }
 
     // MARK: - layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    fileprivate func setupSubViews() {
         let space = globalOptions.pointSpace
         let pointWH = (frame.width - 4 * space)/3.0
         subviews.enumerated().forEach { (offset, element) in
