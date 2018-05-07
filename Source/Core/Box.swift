@@ -169,8 +169,12 @@ class Box: UIView {
         return nil
     }
 
-    func noMoreTouches() {
-        // TODO: 没有触摸处理
+    fileprivate func noMoreTouches() {
+        points.forEach { (point) in
+            point.selected = false
+            point.direct = nil
+        }
+        points.removeAll()
+        setNeedsDisplay()
     }
-
 }

@@ -134,19 +134,18 @@ class Point: UIView {
     ///
     /// - Parameter rect: CGRect
     override func draw(_ rect: CGRect) {
-        if let context = UIGraphicsGetCurrentContext() {
-            transform(context, rect: rect)
-            // context options
-            context.setLineWidth(globalOptions.pointLineWidth)
-            if selected {
-                draw(context, innerSelected)
-                draw(context, outerSelected)
-                if globalOptions.isDrawTriangle {
-                    drawTriangle(context, innerTriangle)
-                }
-            } else {
-                draw(context, innerNormal)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        transform(context, rect: rect)
+        // context options
+        context.setLineWidth(globalOptions.pointLineWidth)
+        if selected {
+            draw(context, innerSelected)
+            draw(context, outerSelected)
+            if globalOptions.isDrawTriangle {
+                drawTriangle(context, innerTriangle)
             }
+        } else {
+            draw(context, innerNormal)
         }
     }
 
