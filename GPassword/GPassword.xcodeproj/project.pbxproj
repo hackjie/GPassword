@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B64A2C1C20A0449B00B17B43 /* Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A2C1B20A0449B00B17B43 /* Dot.swift */; };
+		B64A2C1C20A0449B00B17B43 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A2C1B20A0449B00B17B43 /* Point.swift */; };
 		B662A308209339E100C7418F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B662A307209339E100C7418F /* Extensions.swift */; };
 		B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CBF42091B9470072C4E7 /* AppDelegate.swift */; };
 		B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CBF62091B9470072C4E7 /* ViewController.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B64A2C1B20A0449B00B17B43 /* Dot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot.swift; sourceTree = "<group>"; };
+		B64A2C1B20A0449B00B17B43 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		B662A307209339E100C7418F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B685CBF12091B9470072C4E7 /* GPassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B685CBF42091B9470072C4E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 				B685CC0D2091CF050072C4E7 /* LockOptions.swift */,
 				B685CC0B2091CD3F0072C4E7 /* LockManager.swift */,
 				B6E79DD72094567C00DB69B5 /* Box.swift */,
-				B64A2C1B20A0449B00B17B43 /* Dot.swift */,
+				B64A2C1B20A0449B00B17B43 /* Point.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 				B685CC082091B9550072C4E7 /* GPassword.swift in Sources */,
 				B662A308209339E100C7418F /* Extensions.swift in Sources */,
 				B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */,
-				B64A2C1C20A0449B00B17B43 /* Dot.swift in Sources */,
+				B64A2C1C20A0449B00B17B43 /* Point.swift in Sources */,
 				B6E79DD82094567C00DB69B5 /* Box.swift in Sources */,
 				B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */,
 				B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */,

@@ -24,16 +24,18 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-let MaxPointsNum: Int = 9
+fileprivate let MaxPointsNum: Int = 9
 
 import UIKit
 
 /// Responsible for contain points and control touches
 class Box: UIView {
+    // MARK: - Properties
 
-    /// Points in box
+    /// Points selected in box
     fileprivate var points = [Point]()
 
+    /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
 
     // MARK: - Lifecycle
@@ -47,7 +49,6 @@ class Box: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - layout
     fileprivate func setupSubViews() {
         (0..<MaxPointsNum).forEach { (offset) in
             let space = globalOptions.pointSpace
@@ -63,6 +64,7 @@ class Box: UIView {
         }
     }
 
+    /// Draw selected point and connect-line
     func drawSelectedShapesAndLines() {
         if points.isEmpty { return }
         let linePath = UIBezierPath()
@@ -73,7 +75,6 @@ class Box: UIView {
         lineLayer.lineWidth = globalOptions.connectLineWidth
         points.enumerated().forEach { (offset, element) in
             let pointCenter = element.position
-            print(pointCenter)
             if offset == 0 {
                 linePath.move(to: pointCenter)
             } else {
@@ -84,7 +85,7 @@ class Box: UIView {
         layer.addSublayer(lineLayer)
     }
 
-    // MARK: - touches
+    // MARK: - Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         handleTouches(touches)
     }
@@ -98,53 +99,56 @@ class Box: UIView {
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // touches interrupted will call this method
         noMoreTouches()
     }
 
-    // MARK: - helper
+    // MARK: - Deal touches
+
+    /// Handle touches, add to points, get draw direct
+    ///
+    /// - Parameter touches: Set<UITouch>
     func handleTouches(_ touches: Set<UITouch>) {
         guard !touches.isEmpty else { return }
         let location = touches.first!.location(in: self)
         guard let point = point(by: location), !points.contains(point) else { return }
         points.append(point)
-//        setDirect()
+        setDirect()
         point.selected = true
         drawSelectedShapesAndLines()
     }
 
-    /// set direct for circle draw triangle
-//    func setDirect() {
-//        let count = points.count
-//        if count > 1 {
-//            let after = points[count - 1]
-//            let before = points[count - 2]
-//
-//            let after_x = after.frame.minX
-//            let after_y = after.frame.minY
-//            let before_x = before.frame.minX
-//            let before_y = before.frame.minY
-//            if before_x == after_x, before_y > after_y {
-//                before.direct = .top
-//            } else if before_x < after_x, before_y > after_y {
-//                before.direct = .rightTop
-//            } else if before_x < after_x, before_y == after_y {
-//                before.direct = .right
-//            } else if before_x < after_x, before_y < after_y {
-//                before.direct = .rightBottom
-//            } else if before_x == after_x, before_y < after_y {
-//                before.direct = .bottom
-//            } else if before_x > after_x, before_y < after_y {
-//                before.direct = .leftBottom
-//            } else if before_x > after_x, before_y == after_y {
-//                before.direct = .left
-//            } else if before_x > after_x, before_y > after_y {
-//                before.direct = .leftTop
-//            }
-//        }
-//    }
+    /// Set direct for circle draw triangle
+    func setDirect() {
+        let count = points.count
+        if count > 1 {
+            let after = points[count - 1]
+            let before = points[count - 2]
 
-    /// find point with location
+            let after_x = after.frame.minX
+            let after_y = after.frame.minY
+            let before_x = before.frame.minX
+            let before_y = before.frame.minY
+            if before_x == after_x, before_y > after_y {
+                before.direct = .top
+            } else if before_x < after_x, before_y > after_y {
+                before.direct = .rightTop
+            } else if before_x < after_x, before_y == after_y {
+                before.direct = .right
+            } else if before_x < after_x, before_y < after_y {
+                before.direct = .rightBottom
+            } else if before_x == after_x, before_y < after_y {
+                before.direct = .bottom
+            } else if before_x > after_x, before_y < after_y {
+                before.direct = .leftBottom
+            } else if before_x > after_x, before_y == after_y {
+                before.direct = .left
+            } else if before_x > after_x, before_y > after_y {
+                before.direct = .leftTop
+            }
+        }
+    }
+
+    /// Find point with location
     ///
     /// - Parameter location: CGPoint
     /// - Returns: Point
@@ -158,10 +162,11 @@ class Box: UIView {
         return nil
     }
 
+    /// Deal no touches
     fileprivate func noMoreTouches() {
         points.forEach { (point) in
             point.selected = false
-//            point.direct = nil
+            point.direct = nil
         }
         points.removeAll()
         lineLayer.removeFromSuperlayer()

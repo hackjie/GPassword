@@ -20,14 +20,11 @@ class ViewController: UIViewController {
         GPassword.config { (options) in
             options.isInnerStroke = false
             options.isOuterStroke = false
-            options.isDrawTriangle = true
+            options.isDrawTriangle = false
         }
 
         let box = Box(frame: CGRect(x: globalOptions.pointSpace, y: 100, width: UIScreen.main.bounds.width - 2 * globalOptions.pointSpace, height: 400))
         view.addSubview(box)
-
-//        let dot = Dot(frame: CGRect(x: globalOptions.pointSpace, y: 100, width: UIScreen.main.bounds.width - 2 * globalOptions.pointSpace, height: 400))
-//        view.addSubview(dot)
     }
 
     override func didReceiveMemoryWarning() {
