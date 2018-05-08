@@ -2,7 +2,7 @@
 //  Point.swift
 //  Point
 //
-//  Created by Jie Li on 27/4/18.
+//  Created by Jie Li on 27/5/8.
 //
 //  Copyright (c) 2018 Jie Li <codelijie@gmail.com>
 //
@@ -33,6 +33,22 @@ class Point: CAShapeLayer {
         case top = 1, rightTop, right, rightBottom, bottom, leftBottom, left, leftTop
     }
 
+    /// Enum draw shape type
+    public enum DrawType: Int {
+        case innerNormal, innerSelected, outerSelected, triangle
+    }
+
+    /// Contain all infos to draw
+    fileprivate struct Shape {
+        let type: DrawType
+        let fillColor: UIColor
+        let rect: CGRect
+        let stroke: Bool
+        let strokeColor: UIColor
+    }
+
+    // MARK: - Properties
+
     /// Point selected
     var selected: Bool = false {
         didSet {
@@ -41,14 +57,14 @@ class Point: CAShapeLayer {
     }
 
     /// Angle used to draw triangle when isDrawTriangle is true
-    fileprivate var angle: CGFloat?
+    fileprivate var angle: CGFloat = 0
 
     /// Draw direct
     var direct: Direct? {
-        willSet {
-            if let value = newValue {
-                angle = CGFloat(Double.pi / 4) * CGFloat(value.rawValue - 1)
-                setNeedsDisplay()
+        didSet {
+            if let value = direct {
+                angle = -CGFloat(Double.pi / 4) * CGFloat(value.rawValue - 1)
+                drawAll()
             }
         }
     }
@@ -105,18 +121,6 @@ class Point: CAShapeLayer {
         return outer
     }()
 
-    public enum DrawType: Int {
-        case innerNormal, innerSelected, outerSelected, triangle
-    }
-
-    fileprivate struct Shape {
-        let type: DrawType
-        let fillColor: UIColor
-        let rect: CGRect
-        let stroke: Bool
-        let strokeColor: UIColor
-    }
-
     // MARK: - Lifecycle
     init(frame: CGRect) {
         super.init()
@@ -132,16 +136,25 @@ class Point: CAShapeLayer {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Draw
+
+    /// Draw all layers in point
     func drawAll() {
         sublayers?.removeAll()
         if selected {
             drawShape(innerSelected)
             drawShape(outerSelected)
+            if globalOptions.isDrawTriangle {
+                drawTriangle(innerTriangle)
+            }
         } else {
             drawShape(innerNormal)
         }
     }
 
+    /// Draw single layer in point
+    ///
+    /// - Parameter shape: Shape
     fileprivate func drawShape(_ shape: Shape) {
         let path = UIBezierPath(ovalIn: shape.rect)
         let shapeLayer = CAShapeLayer()
@@ -153,40 +166,33 @@ class Point: CAShapeLayer {
         addSublayer(shapeLayer)
     }
 
-    /// transform context to draw triangle then transform back
+    /// Draw triangle according angle property
     ///
-    /// - Parameters:
-    ///   - context: CGContext
-    ///   - rect: CGRect
-    func transform(_ context: CGContext, rect: CGRect) {
-        let translateXY = rect.width * 0.5
-        context.translateBy(x: translateXY, y: translateXY)
-        context.rotate(by: angle ?? 0)
-        context.translateBy(x: -translateXY, y: -translateXY)
-    }
+    /// - Parameter shape: Shape
+    fileprivate func drawTriangle(_ shape: Shape) {
+        if direct == nil { return }
+        let triangleLayer = CAShapeLayer()
+        let path = UIBezierPath()
+        triangleLayer.fillColor = globalOptions.triangleColor.cgColor
 
-    /// draw triangle
-    ///
-    /// - Parameters:
-    ///   - context: CGContext
-    ///   - circle: DrawBag
-    fileprivate func drawTriangle(_ context: CGContext, _ shape: Shape) {
-        if direct == nil {
-            return
-        }
-        let trianglePathM = CGMutablePath()
         let width = globalOptions.triangleWidth
         let height = globalOptions.triangleHeight
         let topX = shape.rect.minX + shape.rect.width * 0.5
         let topY = shape.rect.minY + (shape.rect.width * 0.5 - height - globalOptions.offsetInnerCircleAndTriangle - shape.rect.height * 0.5)
-        trianglePathM.move(to: CGPoint(x: topX, y: topY))
+        path.move(to: CGPoint(x: topX, y: topY))
         let leftPointX = topX - width * 0.5
         let leftPointY = topY + height
-        trianglePathM.addLine(to: CGPoint(x: leftPointX, y: leftPointY))
+        path.addLine(to: CGPoint(x: leftPointX, y: leftPointY))
         let rightPointX = topX + width * 0.5
-        trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
-        context.addPath(trianglePathM)
-        shape.fillColor.set()
-        context.fillPath()
+        path.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
+        triangleLayer.path = path.cgPath
+
+        // rotate
+        var transform = CATransform3DIdentity
+        transform = CATransform3DTranslate(transform, frame.width/2, frame.height/2, 0)
+        transform = CATransform3DRotate(transform, angle, 0.0, 0.0, -1.0);
+        transform = CATransform3DTranslate(transform, -frame.width/2, -frame.height/2, 0)
+        triangleLayer.transform = transform
+        addSublayer(triangleLayer)
     }
 }
