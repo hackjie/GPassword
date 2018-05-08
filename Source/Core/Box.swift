@@ -34,15 +34,12 @@ class Box: UIView {
     /// Points in box
     fileprivate var points = [Point]()
 
+    fileprivate var lineLayer = CAShapeLayer()
+
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = globalOptions.boxBackgroundColor
-        (0..<MaxPointsNum).forEach { (_) in
-            let point = Point()
-            addSubview(point)
-        }
-
         setupSubViews()
     }
 
@@ -52,48 +49,39 @@ class Box: UIView {
 
     // MARK: - layout
     fileprivate func setupSubViews() {
-        let space = globalOptions.pointSpace
-        let pointWH = (frame.width - 4 * space)/3.0
-        subviews.enumerated().forEach { (offset, element) in
+        (0..<MaxPointsNum).forEach { (offset) in
+            let space = globalOptions.pointSpace
+            let pointWH = (frame.width - 4 * space)/3.0
             // layout vertically
             let row = CGFloat(offset % 3)
             let column = CGFloat(offset / 3)
             let x = space * (row + 1) + row * pointWH
             let y = space * (column + 1) + column * pointWH
             let rect = CGRect(x: x, y: y, width: pointWH, height: pointWH)
-            element.tag = offset
-            element.frame = rect
+            let point = Point(frame: rect)
+            layer.addSublayer(point)
         }
     }
 
-    // MARK: - draw
-    override func draw(_ rect: CGRect) {
+    func drawSelectedShapesAndLines() {
         if points.isEmpty { return }
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        context.addRect(rect)
-        points.forEach { (point) in
-            context.addEllipse(in: point.frame)
-        }
-        context.clip()
-
-        // manage line
-        let linePath = CGMutablePath()
-        globalOptions.connectLineColor.set()
-        context.setLineCap(.round)
-        context.setLineJoin(.round)
-        context.setLineWidth(globalOptions.connectLineWidth)
+        let linePath = UIBezierPath()
+        linePath.lineCapStyle = .round
+        linePath.lineJoinStyle = .round
+        lineLayer.strokeColor = globalOptions.connectLineColor.cgColor
+        lineLayer.fillColor = nil
+        lineLayer.lineWidth = globalOptions.connectLineWidth
         points.enumerated().forEach { (offset, element) in
-            let directPoint = element.center
+            let pointCenter = element.position
+            print(pointCenter)
             if offset == 0 {
-                linePath.move(to: directPoint)
+                linePath.move(to: pointCenter)
             } else {
-                linePath.addLine(to: directPoint)
+                linePath.addLine(to: pointCenter)
             }
         }
-        context.addPath(linePath)
-        context.strokePath()
-
-        // TODO: 画斜线因为矩形边框问题，斜线有空白导致画线显示比较短
+        lineLayer.path = linePath.cgPath
+        layer.addSublayer(lineLayer)
     }
 
     // MARK: - touches
@@ -120,48 +108,49 @@ class Box: UIView {
         let location = touches.first!.location(in: self)
         guard let point = point(by: location), !points.contains(point) else { return }
         points.append(point)
-        setDirect()
+//        setDirect()
         point.selected = true
-        setNeedsDisplay()
+        drawSelectedShapesAndLines()
     }
 
     /// set direct for circle draw triangle
-    func setDirect() {
-        let count = points.count
-        if count > 1 {
-            let after = points[count - 1]
-            let before = points[count - 2]
-
-            let after_x = after.frame.minX
-            let after_y = after.frame.minY
-            let before_x = before.frame.minX
-            let before_y = before.frame.minY
-            if before_x == after_x, before_y > after_y {
-                before.direct = .top
-            } else if before_x < after_x, before_y > after_y {
-                before.direct = .rightTop
-            } else if before_x < after_x, before_y == after_y {
-                before.direct = .right
-            } else if before_x < after_x, before_y < after_y {
-                before.direct = .rightBottom
-            } else if before_x == after_x, before_y < after_y {
-                before.direct = .bottom
-            } else if before_x > after_x, before_y < after_y {
-                before.direct = .leftBottom
-            } else if before_x > after_x, before_y == after_y {
-                before.direct = .left
-            } else if before_x > after_x, before_y > after_y {
-                before.direct = .leftTop
-            }
-        }
-    }
+//    func setDirect() {
+//        let count = points.count
+//        if count > 1 {
+//            let after = points[count - 1]
+//            let before = points[count - 2]
+//
+//            let after_x = after.frame.minX
+//            let after_y = after.frame.minY
+//            let before_x = before.frame.minX
+//            let before_y = before.frame.minY
+//            if before_x == after_x, before_y > after_y {
+//                before.direct = .top
+//            } else if before_x < after_x, before_y > after_y {
+//                before.direct = .rightTop
+//            } else if before_x < after_x, before_y == after_y {
+//                before.direct = .right
+//            } else if before_x < after_x, before_y < after_y {
+//                before.direct = .rightBottom
+//            } else if before_x == after_x, before_y < after_y {
+//                before.direct = .bottom
+//            } else if before_x > after_x, before_y < after_y {
+//                before.direct = .leftBottom
+//            } else if before_x > after_x, before_y == after_y {
+//                before.direct = .left
+//            } else if before_x > after_x, before_y > after_y {
+//                before.direct = .leftTop
+//            }
+//        }
+//    }
 
     /// find point with location
     ///
     /// - Parameter location: CGPoint
     /// - Returns: Point
     func point(by location: CGPoint) -> Point? {
-        for point in subviews where point is Point {
+        guard let sublayers = layer.sublayers else { return nil }
+        for point in sublayers where point is Point {
             if point.frame.contains(location) {
                 return point as? Point
             }
@@ -172,9 +161,9 @@ class Box: UIView {
     fileprivate func noMoreTouches() {
         points.forEach { (point) in
             point.selected = false
-            point.direct = nil
+//            point.direct = nil
         }
         points.removeAll()
-        setNeedsDisplay()
+        lineLayer.removeFromSuperlayer()
     }
 }
