@@ -52,7 +52,7 @@ public class LockOptions {
     public var innerSelectedColor: UIColor = .blue
 
     /// Point inner circle normal color
-    public var innerNormalColor: UIColor = .lightGray
+    public var innerNormalColor: UIColor = UIColor(gpRGB: 0xE2E3F2, alpha: 0.5)
 
     /// Point outer circle selected color
     public var outerSelectedColor: UIColor = UIColor(gpRGB: 0xF6D05F, alpha: 0.5)
