@@ -33,11 +33,14 @@ public class LockOptions {
     /// Box background color
     public var boxBackgroundColor: UIColor = .white
 
-    /// Line connect points color
-    public var connectLineColor: UIColor = .black
+    /// Connect line color
+    public var connectLineColor: UIColor = .lightGray
 
-    /// Line connect points width
+    /// Connect line width
     public var connectLineWidth: CGFloat = 2
+
+    /// Connect line start position
+    public var connectLineStart: LineStart = .border
 
     /// Point context line width
     public var pointLineWidth: CGFloat = 1.0
@@ -86,4 +89,9 @@ public class LockOptions {
 
     /// Offset between inner circle and triangle
     public var offsetInnerCircleAndTriangle: CGFloat = 4
+
+    /// Enum about draw connect line start from center or border
+    public enum LineStart {
+        case center, border
+    }
 }

@@ -29,12 +29,12 @@ import UIKit
 class Point: CAShapeLayer {
 
     /// Draw direct
-    public enum Direct: Int {
+    enum Direct: Int {
         case top = 1, rightTop, right, rightBottom, bottom, leftBottom, left, leftTop
     }
 
     /// Enum draw shape type
-    public enum DrawType: Int {
+    enum DrawType: Int {
         case innerNormal, innerSelected, outerSelected, triangle
     }
 
@@ -70,7 +70,7 @@ class Point: CAShapeLayer {
     }
 
     /// Contain draw infos of inner circle normal
-    private lazy var innerNormal: Shape = {
+    fileprivate lazy var innerNormal: Shape = {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
@@ -83,7 +83,7 @@ class Point: CAShapeLayer {
     }()
 
     /// Contain draw infos of inner circle selected
-    private lazy var innerSelected: Shape = {
+    fileprivate lazy var innerSelected: Shape = {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
@@ -96,7 +96,7 @@ class Point: CAShapeLayer {
     }()
 
     /// Contain draw infos of inner circle normal
-    private lazy var innerTriangle: Shape = {
+    fileprivate lazy var innerTriangle: Shape = {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
@@ -109,7 +109,7 @@ class Point: CAShapeLayer {
     }()
 
     /// Contain draw infos of outer circle selected
-    private lazy var outerSelected: Shape = {
+    fileprivate lazy var outerSelected: Shape = {
         let sizeWH = bounds.width - 2 * globalOptions.pointLineWidth
         let originXY = globalOptions.pointLineWidth
         let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
@@ -155,7 +155,7 @@ class Point: CAShapeLayer {
     /// Draw single layer in point
     ///
     /// - Parameter shape: Shape
-    fileprivate func drawShape(_ shape: Shape) {
+    private func drawShape(_ shape: Shape) {
         let path = UIBezierPath(ovalIn: shape.rect)
         let shapeLayer = CAShapeLayer()
         shapeLayer.fillColor = shape.fillColor.cgColor
@@ -169,7 +169,7 @@ class Point: CAShapeLayer {
     /// Draw triangle according angle property
     ///
     /// - Parameter shape: Shape
-    fileprivate func drawTriangle(_ shape: Shape) {
+    private func drawTriangle(_ shape: Shape) {
         if direct == nil { return }
         let triangleLayer = CAShapeLayer()
         let path = UIBezierPath()
