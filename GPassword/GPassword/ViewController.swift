@@ -21,6 +21,7 @@ class ViewController: UIViewController {
             options.isInnerStroke = false
             options.isOuterStroke = false
             options.isDrawTriangle = false
+//            options.connectLineStart = .center
         }
 
         let box = Box(frame: CGRect(x: globalOptions.pointSpace, y: 100, width: UIScreen.main.bounds.width - 2 * globalOptions.pointSpace, height: 400))
