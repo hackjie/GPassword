@@ -142,8 +142,8 @@ class Point: CAShapeLayer {
     func drawAll() {
         sublayers?.removeAll()
         if selected {
-            drawShape(innerSelected)
             drawShape(outerSelected)
+            drawShape(innerSelected)
             if globalOptions.isDrawTriangle {
                 drawTriangle(innerTriangle)
             }

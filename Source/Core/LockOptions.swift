@@ -49,13 +49,13 @@ public class LockOptions {
     public var pointBackgroundColor: UIColor = .white
 
     /// Point inner circle selected color
-    public var innerSelectedColor: UIColor = .blue
+    public var innerSelectedColor: UIColor = UIColor(gpRGB: 0x5197F2)
 
     /// Point inner circle normal color
-    public var innerNormalColor: UIColor = UIColor(gpRGB: 0xE2E3F2, alpha: 0.5)
+    public var innerNormalColor: UIColor = UIColor(gpRGB: 0xE2E3F2)
 
     /// Point outer circle selected color
-    public var outerSelectedColor: UIColor = UIColor(gpRGB: 0xF6D05F, alpha: 0.5)
+    public var outerSelectedColor: UIColor = UIColor(gpRGB: 0x9BC3E9)
 
     /// Point inner circle scale of Point
     public var scale: CGFloat = 0.3

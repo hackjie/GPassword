@@ -74,26 +74,20 @@ class Box: UIView {
         lineLayer.fillColor = nil
         lineLayer.lineWidth = globalOptions.connectLineWidth
 
-        var before: Point? = nil
         points.enumerated().forEach { (offset, element) in
             let pointCenter = element.position
-            if globalOptions.connectLineStart == .center {
-                if offset == 0 {
-                    linePath.move(to: pointCenter)
-                } else {
-                    linePath.addLine(to: pointCenter)
-                }
+            if offset == 0 {
+                linePath.move(to: pointCenter)
             } else {
-                if let before = before {
-                    let points = pointsDrawFromBorder(before: before, after: element)
-                    linePath.move(to: points.movePoint)
-                    linePath.addLine(to: points.addPoint)
-                }
-                before = element
+                linePath.addLine(to: pointCenter)
             }
         }
         lineLayer.path = linePath.cgPath
-        layer.addSublayer(lineLayer)
+        if globalOptions.connectLineStart == .center {
+            layer.addSublayer(lineLayer)
+        } else {
+            layer.insertSublayer(lineLayer, at: 0)
+        }
     }
 
     // MARK: - Touches
@@ -103,6 +97,7 @@ class Box: UIView {
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         handleTouches(touches)
+        print(touches)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -181,56 +176,5 @@ class Box: UIView {
         }
         points.removeAll()
         lineLayer.removeFromSuperlayer()
-    }
-
-    private func pointsDrawFromBorder(before: Point, after: Point) -> (movePoint: CGPoint, addPoint: CGPoint) {
-        var beforePoint = before.position
-        var afterPoint = after.position
-
-        let absXLength = fabsf(Float(beforePoint.x - afterPoint.x))
-        let absYLength = fabsf(Float(beforePoint.y - afterPoint.y))
-        let absZLength = sqrtf(powf(absXLength, 2.0) + powf(absXLength, 2.0))
-        let radius = Float(before.bounds.width / 2.0)
-
-        let xLength = (radius / absZLength) * absXLength
-        let yLength = (radius / absZLength) * absYLength
-
-        let CGRadius = CGFloat(radius)
-
-        if before.direct == .top {
-            beforePoint.y -= CGRadius
-            afterPoint.y  += CGRadius
-        } else if before.direct == .rightTop {
-            beforePoint.x += CGFloat(xLength)
-            beforePoint.y -= CGFloat(yLength)
-            afterPoint.x  -= CGFloat(xLength)
-            afterPoint.y  += CGFloat(yLength)
-        } else if before.direct == .right {
-            beforePoint.x += CGRadius
-            afterPoint.x  -= CGRadius
-        } else if before.direct == .rightBottom {
-            beforePoint.x += CGFloat(xLength)
-            beforePoint.y += CGFloat(yLength)
-            afterPoint.x  -= CGFloat(xLength)
-            afterPoint.y  -= CGFloat(yLength)
-        } else if before.direct == .bottom {
-            beforePoint.y += CGRadius
-            afterPoint.y  -= CGRadius
-        } else if before.direct == .leftBottom {
-            beforePoint.x -= CGFloat(xLength)
-            beforePoint.y += CGFloat(yLength)
-            afterPoint.x  += CGFloat(xLength)
-            afterPoint.y  -= CGFloat(yLength)
-        } else if before.direct == .left {
-            beforePoint.x -= CGRadius
-            afterPoint.x  += CGRadius
-        } else {//leftTop
-            beforePoint.x -= CGFloat(xLength)
-            beforePoint.y -=  CGFloat(yLength)
-            afterPoint.x  += CGFloat(xLength)
-            afterPoint.y  += CGFloat(yLength)
-        }
-
-        return (beforePoint, afterPoint)
     }
 }
