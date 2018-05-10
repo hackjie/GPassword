@@ -35,6 +35,8 @@ class Box: UIView {
     /// Points selected in box
     fileprivate var points = [Point]()
 
+    var currentPoint: CGPoint?
+
     /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
 
@@ -62,6 +64,7 @@ class Box: UIView {
             let point = Point(frame: rect)
             layer.addSublayer(point)
         }
+        layer.masksToBounds = true
     }
 
     /// Draw selected point and connect-line
@@ -82,6 +85,7 @@ class Box: UIView {
                 linePath.addLine(to: pointCenter)
             }
         }
+        linePath.addLine(to: currentPoint!)
         lineLayer.path = linePath.cgPath
         if globalOptions.connectLineStart == .center {
             layer.addSublayer(lineLayer)
@@ -97,7 +101,6 @@ class Box: UIView {
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         handleTouches(touches)
-        print(touches)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -115,12 +118,22 @@ class Box: UIView {
     /// - Parameter touches: Set<UITouch>
     private func handleTouches(_ touches: Set<UITouch>) {
         guard !touches.isEmpty else { return }
+        currentPoint = touches.first!.location(in: self)
         let location = touches.first!.location(in: self)
-        guard let point = point(by: location), !points.contains(point) else { return }
-        points.append(point)
-        setDirect()
-        point.selected = true
+        if let point = point(by: location), !points.contains(point) {
+            points.append(point)
+            setDirect()
+            point.selected = true
+        }
         drawSelectedShapesAndLines()
+
+//        guard !touches.isEmpty else { return }
+//        let location = touches.first!.location(in: self)
+//        guard let point = point(by: location), !points.contains(point) else { return }
+//        points.append(point)
+//        setDirect()
+//        point.selected = true
+//        drawSelectedShapesAndLines()
     }
 
     /// Set direct for circle draw triangle
@@ -170,6 +183,7 @@ class Box: UIView {
 
     /// Deal no touches
     private func noMoreTouches() {
+        currentPoint = points.last?.position
         points.forEach { (point) in
             point.selected = false
             point.direct = nil
