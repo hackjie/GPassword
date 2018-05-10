@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
         GPassword.config { (options) in
             options.connectLineStart = .border
-            options.isDrawTriangle = true
+            options.isDrawTriangle = false
             options.normalstyle = .innerFill
         }
 

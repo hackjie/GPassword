@@ -30,6 +30,13 @@ import UIKit
 /// call GPassword.config to config global
 public class LockOptions {
 
+    /// Singleton
+    open static let `default`: LockOptions = {
+        return LockOptions()
+    }()
+
+    private init() {}
+
     /// Lock normal style
     public var normalstyle: NormalStyle = .outerStroke
 

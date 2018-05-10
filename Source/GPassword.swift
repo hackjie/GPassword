@@ -26,7 +26,7 @@
 
 import Foundation
 
-public let globalOptions = LockManager.default.lockOptions
+public let globalOptions = LockOptions.default
 
 public typealias ConfigOptionsCompletion = (_ options: LockOptions) -> Void
 
