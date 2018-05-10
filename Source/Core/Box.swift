@@ -35,6 +35,7 @@ class Box: UIView {
     /// Points selected in box
     fileprivate var points = [Point]()
 
+    /// Current touching point
     var currentPoint: CGPoint?
 
     /// Connect line
@@ -126,14 +127,6 @@ class Box: UIView {
             point.selected = true
         }
         drawSelectedShapesAndLines()
-
-//        guard !touches.isEmpty else { return }
-//        let location = touches.first!.location(in: self)
-//        guard let point = point(by: location), !points.contains(point) else { return }
-//        points.append(point)
-//        setDirect()
-//        point.selected = true
-//        drawSelectedShapesAndLines()
     }
 
     /// Set direct for circle draw triangle
