@@ -19,3 +19,16 @@ extension UIColor {
         )
     }
 }
+
+extension CALayer {
+    func shake() {
+        func shake() {
+            let keyFrameAnimation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+            let s = 16
+            keyFrameAnimation.values = [0, s, -s, 0]
+            keyFrameAnimation.duration = 0.3
+            keyFrameAnimation.repeatCount = 1
+            add(keyFrameAnimation, forKey: "shake")
+        }
+    }
+}

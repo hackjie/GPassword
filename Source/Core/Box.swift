@@ -41,6 +41,8 @@ class Box: UIView {
     /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
 
+    var delegate: EventDelegate?
+
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
