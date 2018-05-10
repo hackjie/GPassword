@@ -30,14 +30,17 @@ import UIKit
 /// call GPassword.config to config global
 public class LockOptions {
 
+    /// Lock normal style
+    public var normalstyle: NormalStyle = .outerStroke
+
     /// Box background color
     public var boxBackgroundColor: UIColor = .white
 
     /// Connect line color
-    public var connectLineColor: UIColor = .lightGray
+    public var connectLineColor: UIColor = UIColor(gpRGB: 0x6EBF60)
 
     /// Connect line width
-    public var connectLineWidth: CGFloat = 2
+    public var connectLineWidth: CGFloat = 4.0
 
     /// Connect line start position
     public var connectLineStart: LineStart = .border
@@ -49,13 +52,13 @@ public class LockOptions {
     public var pointBackgroundColor: UIColor = .white
 
     /// Point inner circle selected color
-    public var innerSelectedColor: UIColor = .blue
+    public var innerSelectedColor: UIColor = UIColor(gpRGB: 0x8ABF82)
 
     /// Point inner circle normal color
-    public var innerNormalColor: UIColor = .lightGray
+    public var innerNormalColor: UIColor = UIColor(gpRGB: 0xE2E3F2)
 
     /// Point outer circle selected color
-    public var outerSelectedColor: UIColor = UIColor(gpRGB: 0xF6D05F, alpha: 0.5)
+    public var outerSelectedColor: UIColor = .white
 
     /// Point inner circle scale of Point
     public var scale: CGFloat = 0.3
@@ -64,13 +67,13 @@ public class LockOptions {
     public var isInnerStroke: Bool = false
 
     /// Point outer circle whether draw stroke, width according to pointLineWidth
-    public var isOuterStroke: Bool = false
+    public var isOuterStroke: Bool = true
 
     /// Point inner circle draw stroke color
-    public var innerStrokeColor: UIColor = .red
+    public var innerStrokeColor: UIColor = UIColor(gpRGB: 0x8ABF82)
 
     /// Point outer circle draw stroke color
-    public var outerStrokeColor: UIColor = .red
+    public var outerStrokeColor: UIColor = UIColor(gpRGB: 0x8ABF82)
 
     /// Space between points
     public var pointSpace: CGFloat = 24.0
@@ -79,7 +82,7 @@ public class LockOptions {
     public var isDrawTriangle: Bool = false
 
     /// Triangle background color
-    public var triangleColor: UIColor = .blue
+    public var triangleColor: UIColor = UIColor(gpRGB: 0x8ABF82)
 
     /// Triangle width
     public var triangleWidth: CGFloat = 10
@@ -93,5 +96,10 @@ public class LockOptions {
     /// Enum about draw connect line start from center or border
     public enum LineStart {
         case center, border
+    }
+
+    /// Enum about Point normal style
+    public enum NormalStyle {
+        case innerFill, outerStroke
     }
 }

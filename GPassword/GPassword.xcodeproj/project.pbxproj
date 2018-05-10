@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B64A2C1C20A0449B00B17B43 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A2C1B20A0449B00B17B43 /* Point.swift */; };
+		B65C003620A4262C008388A1 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65C003520A4262C008388A1 /* EventDelegate.swift */; };
+		B65C004720A4319D008388A1 /* GPassword.strings in Resources */ = {isa = PBXBuildFile; fileRef = B65C004920A4319D008388A1 /* GPassword.strings */; };
+		B65C004C20A43BF9008388A1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65C004B20A43BF9008388A1 /* PasswordViewController.swift */; };
 		B662A308209339E100C7418F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B662A307209339E100C7418F /* Extensions.swift */; };
 		B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CBF42091B9470072C4E7 /* AppDelegate.swift */; };
 		B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CBF62091B9470072C4E7 /* ViewController.swift */; };
@@ -15,13 +18,18 @@
 		B685CBFC2091B9470072C4E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B685CBFB2091B9470072C4E7 /* Assets.xcassets */; };
 		B685CBFF2091B9470072C4E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B685CBFD2091B9470072C4E7 /* LaunchScreen.storyboard */; };
 		B685CC082091B9550072C4E7 /* GPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC072091B9550072C4E7 /* GPassword.swift */; };
-		B685CC0C2091CD3F0072C4E7 /* LockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0B2091CD3F0072C4E7 /* LockManager.swift */; };
 		B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685CC0D2091CF050072C4E7 /* LockOptions.swift */; };
 		B6E79DD82094567C00DB69B5 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E79DD72094567C00DB69B5 /* Box.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B64A2C1B20A0449B00B17B43 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		B65C003520A4262C008388A1 /* EventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
+		B65C004320A43170008388A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		B65C004420A43170008388A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B65C004820A4319D008388A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GPassword.strings; sourceTree = "<group>"; };
+		B65C004A20A431A4008388A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GPassword.strings"; sourceTree = "<group>"; };
+		B65C004B20A43BF9008388A1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		B662A307209339E100C7418F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B685CBF12091B9470072C4E7 /* GPassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B685CBF42091B9470072C4E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +39,6 @@
 		B685CBFE2091B9470072C4E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B685CC002091B9470072C4E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B685CC072091B9550072C4E7 /* GPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPassword.swift; sourceTree = "<group>"; };
-		B685CC0B2091CD3F0072C4E7 /* LockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockManager.swift; sourceTree = "<group>"; };
 		B685CC0D2091CF050072C4E7 /* LockOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
 		B6E79DD72094567C00DB69B5 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +84,7 @@
 			children = (
 				B685CBF42091B9470072C4E7 /* AppDelegate.swift */,
 				B685CBF62091B9470072C4E7 /* ViewController.swift */,
+				B65C004B20A43BF9008388A1 /* PasswordViewController.swift */,
 				B685CBF82091B9470072C4E7 /* Main.storyboard */,
 				B685CBFB2091B9470072C4E7 /* Assets.xcassets */,
 				B685CBFD2091B9470072C4E7 /* LaunchScreen.storyboard */,
@@ -88,9 +96,10 @@
 		B685CC062091B9550072C4E7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B685CC072091B9550072C4E7 /* GPassword.swift */,
 				B662A3042093393F00C7418F /* Extension */,
 				B685CC0A2091C5CD0072C4E7 /* Core */,
-				B685CC072091B9550072C4E7 /* GPassword.swift */,
+				B65C004920A4319D008388A1 /* GPassword.strings */,
 			);
 			name = Source;
 			path = ../Source;
@@ -100,9 +109,9 @@
 			isa = PBXGroup;
 			children = (
 				B685CC0D2091CF050072C4E7 /* LockOptions.swift */,
-				B685CC0B2091CD3F0072C4E7 /* LockManager.swift */,
 				B6E79DD72094567C00DB69B5 /* Box.swift */,
 				B64A2C1B20A0449B00B17B43 /* Point.swift */,
+				B65C003520A4262C008388A1 /* EventDelegate.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -150,6 +159,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = B685CBE82091B9470072C4E7;
 			productRefGroup = B685CBF22091B9470072C4E7 /* Products */;
@@ -169,6 +179,7 @@
 				B685CBFF2091B9470072C4E7 /* LaunchScreen.storyboard in Resources */,
 				B685CBFC2091B9470072C4E7 /* Assets.xcassets in Resources */,
 				B685CBFA2091B9470072C4E7 /* Main.storyboard in Resources */,
+				B65C004720A4319D008388A1 /* GPassword.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B685CC0C2091CD3F0072C4E7 /* LockManager.swift in Sources */,
+				B65C004C20A43BF9008388A1 /* PasswordViewController.swift in Sources */,
 				B685CC082091B9550072C4E7 /* GPassword.swift in Sources */,
 				B662A308209339E100C7418F /* Extensions.swift in Sources */,
 				B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */,
@@ -187,16 +198,27 @@
 				B6E79DD82094567C00DB69B5 /* Box.swift in Sources */,
 				B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */,
 				B685CBF52091B9470072C4E7 /* AppDelegate.swift in Sources */,
+				B65C003620A4262C008388A1 /* EventDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		B65C004920A4319D008388A1 /* GPassword.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B65C004820A4319D008388A1 /* en */,
+				B65C004A20A431A4008388A1 /* zh-Hans */,
+			);
+			name = GPassword.strings;
+			sourceTree = "<group>";
+		};
 		B685CBF82091B9470072C4E7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B685CBF92091B9470072C4E7 /* Base */,
+				B65C004320A43170008388A1 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -205,6 +227,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B685CBFE2091B9470072C4E7 /* Base */,
+				B65C004420A43170008388A1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -216,6 +239,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -273,6 +297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

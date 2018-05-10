@@ -2,7 +2,7 @@
 //  Point.swift
 //  Point
 //
-//  Created by Jie Li on 27/5/8.
+//  Created by Jie Li on 8/5/18.
 //
 //  Copyright (c) 2018 Jie Li <codelijie@gmail.com>
 //
@@ -30,17 +30,12 @@ class Point: CAShapeLayer {
 
     /// Draw direct
     enum Direct: Int {
+        // TODO: need optimiation for more directs
         case top = 1, rightTop, right, rightBottom, bottom, leftBottom, left, leftTop
-    }
-
-    /// Enum draw shape type
-    enum DrawType: Int {
-        case innerNormal, innerSelected, outerSelected, triangle
     }
 
     /// Contain all infos to draw
     fileprivate struct Shape {
-        let type: DrawType
         let fillColor: UIColor
         let rect: CGRect
         let stroke: Bool
@@ -74,11 +69,10 @@ class Point: CAShapeLayer {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = Shape(type: .innerNormal,
-                            fillColor: globalOptions.innerNormalColor,
-                            rect: rect,
-                            stroke: globalOptions.isInnerStroke,
-                            strokeColor: globalOptions.innerStrokeColor)
+        let inner = Shape(fillColor: globalOptions.innerNormalColor,
+                          rect: rect,
+                          stroke: globalOptions.isInnerStroke,
+                          strokeColor: globalOptions.innerStrokeColor)
         return inner
     }()
 
@@ -87,11 +81,10 @@ class Point: CAShapeLayer {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = Shape(type: .innerSelected,
-                            fillColor: globalOptions.innerSelectedColor,
-                            rect: rect,
-                            stroke: globalOptions.isInnerStroke,
-                            strokeColor: globalOptions.innerStrokeColor)
+        let inner = Shape(fillColor: globalOptions.innerSelectedColor,
+                          rect: rect,
+                          stroke: globalOptions.isInnerStroke,
+                          strokeColor: globalOptions.innerStrokeColor)
         return inner
     }()
 
@@ -100,12 +93,23 @@ class Point: CAShapeLayer {
         let rectWH = bounds.width * globalOptions.scale
         let rectXY = bounds.width * (1 - globalOptions.scale) * 0.5
         let rect =  CGRect(x: rectXY, y: rectXY, width: rectWH, height: rectWH)
-        let inner = Shape(type: .triangle,
-                            fillColor: globalOptions.triangleColor,
-                            rect: rect,
-                            stroke: globalOptions.isInnerStroke,
-                            strokeColor: globalOptions.innerStrokeColor)
+        let inner = Shape(fillColor: globalOptions.triangleColor,
+                          rect: rect,
+                          stroke: globalOptions.isInnerStroke,
+                          strokeColor: globalOptions.innerStrokeColor)
         return inner
+    }()
+
+    /// Contain draw infos of outer circle stroke
+    fileprivate lazy var outerStroke: Shape = {
+        let sizeWH = bounds.width - 2 * globalOptions.pointLineWidth
+        let originXY = globalOptions.pointLineWidth
+        let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
+        let outer = Shape(fillColor: .white,
+                          rect: rect,
+                          stroke: globalOptions.isOuterStroke,
+                          strokeColor: globalOptions.outerStrokeColor)
+        return outer
     }()
 
     /// Contain draw infos of outer circle selected
@@ -113,11 +117,10 @@ class Point: CAShapeLayer {
         let sizeWH = bounds.width - 2 * globalOptions.pointLineWidth
         let originXY = globalOptions.pointLineWidth
         let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
-        let outer = Shape(type: .outerSelected,
-                            fillColor: globalOptions.outerSelectedColor,
-                            rect: rect,
-                            stroke: globalOptions.isOuterStroke,
-                            strokeColor: globalOptions.outerStrokeColor)
+        let outer = Shape(fillColor: globalOptions.outerSelectedColor,
+                          rect: rect,
+                          stroke: globalOptions.isOuterStroke,
+                          strokeColor: globalOptions.outerStrokeColor)
         return outer
     }()
 
@@ -142,13 +145,17 @@ class Point: CAShapeLayer {
     func drawAll() {
         sublayers?.removeAll()
         if selected {
-            drawShape(innerSelected)
             drawShape(outerSelected)
+            drawShape(innerSelected)
             if globalOptions.isDrawTriangle {
                 drawTriangle(innerTriangle)
             }
         } else {
-            drawShape(innerNormal)
+            if globalOptions.normalstyle == .innerFill {
+                drawShape(innerNormal)
+            } else {
+                drawShape(outerStroke)
+            }
         }
     }
 

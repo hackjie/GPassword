@@ -35,8 +35,13 @@ class Box: UIView {
     /// Points selected in box
     fileprivate var points = [Point]()
 
+    /// Current touching point
+    var currentPoint: CGPoint?
+
     /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
+
+    var delegate: EventDelegate?
 
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -62,6 +67,7 @@ class Box: UIView {
             let point = Point(frame: rect)
             layer.addSublayer(point)
         }
+        layer.masksToBounds = true
     }
 
     /// Draw selected point and connect-line
@@ -74,26 +80,21 @@ class Box: UIView {
         lineLayer.fillColor = nil
         lineLayer.lineWidth = globalOptions.connectLineWidth
 
-        var before: Point? = nil
         points.enumerated().forEach { (offset, element) in
             let pointCenter = element.position
-            if globalOptions.connectLineStart == .center {
-                if offset == 0 {
-                    linePath.move(to: pointCenter)
-                } else {
-                    linePath.addLine(to: pointCenter)
-                }
+            if offset == 0 {
+                linePath.move(to: pointCenter)
             } else {
-                if let before = before {
-                    let points = pointsDrawFromBorder(before: before, after: element)
-                    linePath.move(to: points.movePoint)
-                    linePath.addLine(to: points.addPoint)
-                }
-                before = element
+                linePath.addLine(to: pointCenter)
             }
         }
+        linePath.addLine(to: currentPoint!)
         lineLayer.path = linePath.cgPath
-        layer.addSublayer(lineLayer)
+        if globalOptions.connectLineStart == .center {
+            layer.addSublayer(lineLayer)
+        } else {
+            layer.insertSublayer(lineLayer, at: 0)
+        }
     }
 
     // MARK: - Touches
@@ -120,11 +121,13 @@ class Box: UIView {
     /// - Parameter touches: Set<UITouch>
     private func handleTouches(_ touches: Set<UITouch>) {
         guard !touches.isEmpty else { return }
+        currentPoint = touches.first!.location(in: self)
         let location = touches.first!.location(in: self)
-        guard let point = point(by: location), !points.contains(point) else { return }
-        points.append(point)
-        setDirect()
-        point.selected = true
+        if let point = point(by: location), !points.contains(point) {
+            points.append(point)
+            setDirect()
+            point.selected = true
+        }
         drawSelectedShapesAndLines()
     }
 
@@ -175,62 +178,12 @@ class Box: UIView {
 
     /// Deal no touches
     private func noMoreTouches() {
+        currentPoint = points.last?.position
         points.forEach { (point) in
             point.selected = false
             point.direct = nil
         }
         points.removeAll()
         lineLayer.removeFromSuperlayer()
-    }
-
-    private func pointsDrawFromBorder(before: Point, after: Point) -> (movePoint: CGPoint, addPoint: CGPoint) {
-        var beforePoint = before.position
-        var afterPoint = after.position
-
-        let absXLength = fabsf(Float(beforePoint.x - afterPoint.x))
-        let absYLength = fabsf(Float(beforePoint.y - afterPoint.y))
-        let absZLength = sqrtf(powf(absXLength, 2.0) + powf(absXLength, 2.0))
-        let radius = Float(before.bounds.width / 2.0)
-
-        let xLength = (radius / absZLength) * absXLength
-        let yLength = (radius / absZLength) * absYLength
-
-        let CGRadius = CGFloat(radius)
-
-        if before.direct == .top {
-            beforePoint.y -= CGRadius
-            afterPoint.y  += CGRadius
-        } else if before.direct == .rightTop {
-            beforePoint.x += CGFloat(xLength)
-            beforePoint.y -= CGFloat(yLength)
-            afterPoint.x  -= CGFloat(xLength)
-            afterPoint.y  += CGFloat(yLength)
-        } else if before.direct == .right {
-            beforePoint.x += CGRadius
-            afterPoint.x  -= CGRadius
-        } else if before.direct == .rightBottom {
-            beforePoint.x += CGFloat(xLength)
-            beforePoint.y += CGFloat(yLength)
-            afterPoint.x  -= CGFloat(xLength)
-            afterPoint.y  -= CGFloat(yLength)
-        } else if before.direct == .bottom {
-            beforePoint.y += CGRadius
-            afterPoint.y  -= CGRadius
-        } else if before.direct == .leftBottom {
-            beforePoint.x -= CGFloat(xLength)
-            beforePoint.y += CGFloat(yLength)
-            afterPoint.x  += CGFloat(xLength)
-            afterPoint.y  -= CGFloat(yLength)
-        } else if before.direct == .left {
-            beforePoint.x -= CGRadius
-            afterPoint.x  += CGRadius
-        } else {//leftTop
-            beforePoint.x -= CGFloat(xLength)
-            beforePoint.y -=  CGFloat(yLength)
-            afterPoint.x  += CGFloat(xLength)
-            afterPoint.y  += CGFloat(yLength)
-        }
-
-        return (beforePoint, afterPoint)
     }
 }

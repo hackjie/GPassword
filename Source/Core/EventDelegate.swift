@@ -1,8 +1,8 @@
 //
-//  GPassword.swift
-//  GPassword
+//  Point.swift
+//  Point
 //
-//  Created by Jie Li on 26/4/18.
+//  Created by Jie Li on 10/5/18.
 //
 //  Copyright (c) 2018 Jie Li <codelijie@gmail.com>
 //
@@ -24,16 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
-
-open class LockManager {
-
-    // MARK: - Properties
-    open var lockOptions = LockOptions()
-
-    open static let `default`: LockManager = {
-        return LockManager()
-    }()
-
-    private init() {}
+public protocol EventDelegate {
+    func touchesEnded()
 }
