@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  GPassword
+
+  Created by leoli on 2018/5/14.
+  Copyright © 2018年 leoli. All rights reserved.
+*/
+"normal_title"           = "Please input gesture password";
+"gesture_password"       = "Gesture Password";
+"forget_password_title"  = "forget password?";
+"less_connect_point_num" = "At last connect 3 points, please redraw";
+"setting_password_title" = "Please input gesture password";
+"once_input_confirm"     = "Please input again to confirm";
+"two_input_different"    = "Passwords different, Please re-set";
+"password_input_error"   = "error password, can input";

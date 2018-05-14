@@ -24,6 +24,14 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+/// Protocol for handle touched-Points and deal with points
 public protocol EventDelegate {
+    
+    /// Use to notice the gesture point, and consist of password
+    ///
+    /// - Parameter tag: String. identifer for point
+    func sendTouchPoint(with tag: String)
+    
+    /// Use to notice gesture end
     func touchesEnded()
 }

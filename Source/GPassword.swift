@@ -26,7 +26,7 @@
 
 import Foundation
 
-public let globalOptions = LockOptions.default
+public let globalOptions = LockManager.default.options
 
 public typealias ConfigOptionsCompletion = (_ options: LockOptions) -> Void
 
@@ -35,4 +35,104 @@ public typealias ConfigOptionsCompletion = (_ options: LockOptions) -> Void
 /// - Parameter config: ConfigOptionsCompletion
 public func config(_ config: ConfigOptionsCompletion) {
     config(globalOptions)
+}
+
+// MARK: - Save get remove password
+
+/// Save Password
+///
+/// - Parameters:
+///   - password: String
+///   - key: String
+public func save(password: String, with key: String) {
+    LockManager.default.save(string: password, with: key)
+}
+
+/// Remove Password
+///
+/// - Parameter key: String
+public func removePassword(with key: String) {
+    LockManager.default.removeItem(with: key)
+}
+
+/// Get Password
+///
+/// - Parameter key: String
+/// - Returns: String Optional
+public func getPassword(with key: String) -> String? {
+    return LockManager.default.getStringItem(with: key)
+}
+
+// MARK: - Control gesture open close
+
+/// Whether open gesture password
+///
+/// - Parameter key: String
+/// - Returns: Bool Optional
+public func hasOpenGesture(with key: String) -> Bool? {
+    return LockManager.default.getBoolItem(with: key)
+}
+
+/// Open gesture password
+///
+/// - Parameter key: String
+public func openGesture(with key: String) {
+    LockManager.default.save(bool: true, with: key)
+}
+
+/// Close gesture password
+///
+/// - Parameter key: String
+public func closeGesture(with key: String) {
+    LockManager.default.save(bool: false, with: key)
+}
+
+// MARK: - Control show selected-track or not
+
+/// Whether show points those had been selected
+///
+/// - Returns: Bool Optional
+public func hasOpenTrack() -> Bool? {
+    return LockManager.default.getBoolItem(with: globalOptions.trackKey)
+}
+
+/// Show points selected
+public func openTrack() {
+    LockManager.default.save(bool: true, with: globalOptions.trackKey)
+}
+
+/// Hide points selected
+public func closeTrack() {
+    LockManager.default.save(bool: false, with: globalOptions.trackKey)
+}
+
+// MARK: - Max error num
+
+/// Increase error num
+///
+/// - Parameter key: String
+public func increaseErrorNum(with key: String) {
+    var num = 0
+    
+    if let hasNum = getErrorNum(with: key), hasNum < globalOptions.maxErrorNum {
+        num = hasNum + 1
+    } else {
+        num = globalOptions.maxErrorNum
+    }
+    LockManager.default.save(string: String(num), with: key)
+}
+
+/// Get error num
+///
+/// - Parameter key: String
+/// - Returns: Int Optional
+public func getErrorNum(with key: String) -> Int? {
+    return Int(LockManager.default.getStringItem(with: key) ?? "0")
+}
+
+/// Remove error record
+///
+/// - Parameter key: String
+public func removeErrorNum(with key: String) {
+    LockManager.default.removeItem(with: key)
 }

@@ -24,8 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-fileprivate let MaxPointsNum: Int = 9
-
 import UIKit
 
 /// Responsible for contain points and control touches
@@ -55,23 +53,24 @@ class Box: UIView {
     }
 
     private func setupSubViews() {
-        (0..<MaxPointsNum).forEach { (offset) in
+        (0..<(globalOptions.matrixNum * globalOptions.matrixNum)).forEach { (offset) in
             let space = globalOptions.pointSpace
-            let pointWH = (frame.width - 4 * space)/3.0
+            let pointWH = (frame.width - CGFloat(globalOptions.matrixNum - 1) * space) / CGFloat(globalOptions.matrixNum)
             // layout vertically
-            let row = CGFloat(offset % 3)
-            let column = CGFloat(offset / 3)
-            let x = space * (row + 1) + row * pointWH
-            let y = space * (column + 1) + column * pointWH
+            let row = CGFloat(offset % globalOptions.matrixNum)
+            let column = CGFloat(offset / globalOptions.matrixNum)
+            let x = space * (row) + row * pointWH
+            let y = space * (column) + column * pointWH
             let rect = CGRect(x: x, y: y, width: pointWH, height: pointWH)
             let point = Point(frame: rect)
+            point.tag = offset
             layer.addSublayer(point)
         }
         layer.masksToBounds = true
     }
 
-    /// Draw selected point and connect-line
-    private func drawSelectedShapesAndLines() {
+    /// Draw connect-lines
+    private func drawLines() {
         if points.isEmpty { return }
         let linePath = UIBezierPath()
         linePath.lineCapStyle = .round
@@ -88,7 +87,10 @@ class Box: UIView {
                 linePath.addLine(to: pointCenter)
             }
         }
-        linePath.addLine(to: currentPoint!)
+        
+        if let current = currentPoint {
+            linePath.addLine(to: current)
+        }
         lineLayer.path = linePath.cgPath
         if globalOptions.connectLineStart == .center {
             layer.addSublayer(lineLayer)
@@ -116,7 +118,7 @@ class Box: UIView {
 
     // MARK: - Deal touches
 
-    /// Handle touches, add to points, get draw direct
+    /// Handle touches, add to points, get draw angle
     ///
     /// - Parameter touches: Set<UITouch>
     private func handleTouches(_ touches: Set<UITouch>) {
@@ -125,14 +127,21 @@ class Box: UIView {
         let location = touches.first!.location(in: self)
         if let point = point(by: location), !points.contains(point) {
             points.append(point)
-            setDirect()
-            point.selected = true
+            calAngle()
+            if GPassword.hasOpenTrack() == nil || GPassword.hasOpenTrack() == true {
+                point.selected = true
+            }
+            // send touch point to delegate
+            guard let delegate = self.delegate else { return }
+            delegate.sendTouchPoint(with: "\(point.tag)")
         }
-        drawSelectedShapesAndLines()
+        if GPassword.hasOpenTrack() == nil || GPassword.hasOpenTrack() == true {
+            drawLines()
+        }
     }
 
-    /// Set direct for circle draw triangle
-    private func setDirect() {
+    /// Calculate angle for circle draw triangle
+    private func calAngle() {
         let count = points.count
         if count > 1 {
             let after = points[count - 1]
@@ -142,22 +151,27 @@ class Box: UIView {
             let after_y = after.frame.minY
             let before_x = before.frame.minX
             let before_y = before.frame.minY
+            
+            let absX = fabsf(Float(before_x - after_x))
+            let absY = fabsf(Float(before_y - after_y))
+            let abxZ = sqrtf(pow(absX, 2) + pow(absY, 2))
+            
             if before_x == after_x, before_y > after_y {
-                before.direct = .top
+                before.angle = 0
             } else if before_x < after_x, before_y > after_y {
-                before.direct = .rightTop
+                before.angle = -CGFloat(asin(absX/abxZ))
             } else if before_x < after_x, before_y == after_y {
-                before.direct = .right
+                before.angle = -CGFloat(Double.pi) / 2
             } else if before_x < after_x, before_y < after_y {
-                before.direct = .rightBottom
+                before.angle = -(CGFloat(Double.pi) / 2) - CGFloat(asin(absY/abxZ))
             } else if before_x == after_x, before_y < after_y {
-                before.direct = .bottom
+                before.angle = -CGFloat(Double.pi)
             } else if before_x > after_x, before_y < after_y {
-                before.direct = .leftBottom
+                before.angle = -CGFloat(Double.pi) - CGFloat(asin(absX/abxZ))
             } else if before_x > after_x, before_y == after_y {
-                before.direct = .left
+                before.angle = -CGFloat(Double.pi * 1.5)
             } else if before_x > after_x, before_y > after_y {
-                before.direct = .leftTop
+                before.angle = -CGFloat(Double.pi * 1.5) - CGFloat(asin(absY/abxZ))
             }
         }
     }
@@ -181,9 +195,12 @@ class Box: UIView {
         currentPoint = points.last?.position
         points.forEach { (point) in
             point.selected = false
-            point.direct = nil
+            point.angle = 9999
         }
         points.removeAll()
         lineLayer.removeFromSuperlayer()
+        // tell delegate touch end
+        guard let delegate = self.delegate else { return }
+        delegate.touchesEnded()
     }
 }

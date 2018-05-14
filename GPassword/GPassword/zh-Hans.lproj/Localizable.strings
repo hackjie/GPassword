@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  GPassword
+
+  Created by leoli on 2018/5/14.
+  Copyright © 2018年 leoli. All rights reserved.
+*/
+"normal_title"           = "请输入手势密码";
+"gesture_password"       = "手势密码";
+"forget_password_title"  = "忘记手势密码?";
+"less_connect_point_num" = "至少连接 3 个点, 请重新绘制";
+"setting_password_title" = "请设置手势密码";
+"once_input_confirm"     = "再次输入以确认";
+"two_input_different"    = "密码不一致, 请重新设置";
+"password_input_error"   = "密码错误, 你还可以输入";

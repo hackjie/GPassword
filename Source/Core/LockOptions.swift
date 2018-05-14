@@ -29,13 +29,10 @@ import UIKit
 /// LockOptions is options for user to adjust something about UI.
 /// call GPassword.config to config global
 public class LockOptions {
-
-    /// Singleton
-    open static let `default`: LockOptions = {
-        return LockOptions()
-    }()
-
-    private init() {}
+    
+    /// Num for Matrix. eg: 3 is 3*3; 4  is 4*4
+    /// you need to adjust pointSpace to fit this matrix
+    public var matrixNum: Int = 3
 
     /// Lock normal style
     public var normalstyle: NormalStyle = .outerStroke
@@ -83,7 +80,7 @@ public class LockOptions {
     public var outerStrokeColor: UIColor = UIColor(gpRGB: 0x8ABF82)
 
     /// Space between points
-    public var pointSpace: CGFloat = 24.0
+    public var pointSpace: CGFloat = 30.0
 
     /// Point inner circle whether draw triangle
     public var isDrawTriangle: Bool = false
@@ -109,4 +106,10 @@ public class LockOptions {
     public enum NormalStyle {
         case innerFill, outerStroke
     }
+    
+    /// Key for saving whether show points selected
+    public var trackKey = "track_key"
+    
+    /// Used to verify and modify
+    public var maxErrorNum:Int = 5
 }

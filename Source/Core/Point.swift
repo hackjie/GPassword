@@ -28,12 +28,6 @@ import UIKit
 
 class Point: CAShapeLayer {
 
-    /// Draw direct
-    enum Direct: Int {
-        // TODO: need optimiation for more directs
-        case top = 1, rightTop, right, rightBottom, bottom, leftBottom, left, leftTop
-    }
-
     /// Contain all infos to draw
     fileprivate struct Shape {
         let fillColor: UIColor
@@ -52,17 +46,14 @@ class Point: CAShapeLayer {
     }
 
     /// Angle used to draw triangle when isDrawTriangle is true
-    fileprivate var angle: CGFloat = 0
-
-    /// Draw direct
-    var direct: Direct? {
+    var angle: CGFloat = 9999 {
         didSet {
-            if let value = direct {
-                angle = -CGFloat(Double.pi / 4) * CGFloat(value.rawValue - 1)
-                drawAll()
-            }
+            drawAll()
         }
     }
+    
+    /// The identifier for point
+    var tag: Int = 0
 
     /// Contain draw infos of inner circle normal
     fileprivate lazy var innerNormal: Shape = {
@@ -177,7 +168,7 @@ class Point: CAShapeLayer {
     ///
     /// - Parameter shape: Shape
     private func drawTriangle(_ shape: Shape) {
-        if direct == nil { return }
+        if angle == 9999 { return }
         let triangleLayer = CAShapeLayer()
         let path = UIBezierPath()
         triangleLayer.fillColor = globalOptions.triangleColor.cgColor
