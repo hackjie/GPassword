@@ -24,7 +24,43 @@ pod "GPassword"
 
 ## Usage
 
+First custom UI style, here is what you need:
 
+```swift
+GPassword.config { (options) in
+    options.connectLineStart = .border
+    options.normalstyle = .innerFill
+    options.isDrawTriangle = true
+    options.matrixNum = 3
+}
+```
+
+then you can use `Box.swift` or add it to a UIViewController
+
+```swift
+fileprivate lazy var passwordBox: Box = {
+    let box = Box(frame: CGRect(x: 50, y: 200, width: GWidth - 2 * 50, height: 400))
+    box.delegate = self
+    return box
+}()
+```
+
+then you need to achieve two delegate methods
+
+```swift
+extension PasswordViewController: EventDelegate {
+    func sendTouchPoint(with tag: String) {
+        print(tag)
+        password += tag
+    }
+    
+    func touchesEnded() {
+    
+    }
+}
+```
+
+more you can see demo
 
 ## License
 

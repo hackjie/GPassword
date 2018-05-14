@@ -111,5 +111,5 @@ public class LockOptions {
     public var trackKey = "track_key"
     
     /// Used to verify and modify
-    public var maxErrorNum:Int = 5
+    public var maxErrorNum: Int = 5
 }

@@ -72,7 +72,7 @@ class PasswordViewController: UIViewController {
             } else if type == .verify {
                 warnLabel.text = String.gp_localized("normal_title")
             } else {
-                
+                warnLabel.text = String.gp_localized("normal_title")
             }
         }
     }
