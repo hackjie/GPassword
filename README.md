@@ -28,7 +28,7 @@ pod "GPassword"
 
 ## License
 
-GPassword is released under the MIT license. [See LICENSE]() for details
+GPassword is released under the MIT license. [See LICENSE](https://github.com/hackjie/GPassword/blob/master/LICENSE) for details
 
 
 
