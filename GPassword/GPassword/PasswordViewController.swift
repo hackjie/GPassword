@@ -114,8 +114,9 @@ class PasswordViewController: UIViewController {
         title = String.gp_localized("gesture_password")
         GPassword.config { (options) in
             options.connectLineStart = .border
-            options.normalstyle = .innerFill
-            options.isDrawTriangle = true
+            options.normalstyle = .outerStroke
+            options.isDrawTriangle = false
+            options.connectLineWidth = 4
             options.matrixNum = 3
         }
 

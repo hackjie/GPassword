@@ -17,6 +17,20 @@ Simple gesture password in swift
 * Support define many kinds of normal and selected style
 * Use KeyChain to save informations
 
+## Screenshots
+
+<figure class="third">
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/first.gif">
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/second.gif">
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/third.gif">
+</figure>
+
+## Requirements
+
+* iOS 8.0+
+* Xcode 9.0+
+* Swift 4.0+
+
 ## Install
 
 CocoaPods
