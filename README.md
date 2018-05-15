@@ -20,9 +20,9 @@ Simple gesture password in swift
 ## Screenshots
 
 <figure class="third">
-    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/first.gif">
-    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/second.gif">
-    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/third.gif">
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/first.gif" />
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/second.gif" />
+    <img src="https://github.com/hackjie/GPassword/blob/master/Resources/third.gif" />
 </figure>
 
 ## Requirements
