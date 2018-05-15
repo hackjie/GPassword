@@ -53,12 +53,12 @@ then you need to achieve two delegate methods, you should write business logics 
 ```swift
 extension PasswordViewController: EventDelegate {
     func sendTouchPoint(with tag: String) {
-        print(tag)
         password += tag
+        // get complete password
     }
     
     func touchesEnded() {
-    
+        // write business logics according to type
     }
 }
 ```
