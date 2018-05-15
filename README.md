@@ -3,6 +3,7 @@
 ![GPassword](https://github.com/hackjie/GPassword/blob/master/Resources/GPassword.png)
 
 ![Swift](https://img.shields.io/badge/language-swift-orange.svg)
+[![](https://travis-ci.org/hackjie/GPassword.svg?branch=master)](https://travis-ci.org/hackjie/GPassword)
 
 Simple gesture password in swift
 
@@ -45,7 +46,7 @@ fileprivate lazy var passwordBox: Box = {
 }()
 ```
 
-then you need to achieve two delegate methods
+then you need to achieve two delegate methods, you should write business logics in them, `sendTouchPoint` can send out complete password and `touchesEnded` can deal business logics according to type(setting/verify/modify) 
 
 ```swift
 extension PasswordViewController: EventDelegate {
@@ -60,7 +61,7 @@ extension PasswordViewController: EventDelegate {
 }
 ```
 
-more you can see demo
+more informations you can see `PasswordViewController.swift` in demo project, I write an example.
 
 ## License
 
