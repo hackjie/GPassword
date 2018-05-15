@@ -27,7 +27,7 @@
 import UIKit
 
 /// Responsible for contain points and control touches
-class Box: UIView {
+open class Box: UIView {
     // MARK: - Properties
 
     /// Points selected in box
@@ -48,7 +48,7 @@ class Box: UIView {
         setupSubViews()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -100,19 +100,19 @@ class Box: UIView {
     }
 
     // MARK: - Touches
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         handleTouches(touches)
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         handleTouches(touches)
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         noMoreTouches()
     }
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         noMoreTouches()
     }
 
