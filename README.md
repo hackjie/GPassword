@@ -2,8 +2,10 @@
 
 ![GPassword](https://github.com/hackjie/GPassword/blob/master/Resources/GPassword.png)
 
-![Swift](https://img.shields.io/badge/language-swift-orange.svg)
 [![](https://travis-ci.org/hackjie/GPassword.svg?branch=master)](https://travis-ci.org/hackjie/GPassword)
+![](https://img.shields.io/badge/language-swift-orange.svg)
+![](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+![](https://img.shields.io/badge/license-MIT-000000.svg)
 
 Simple gesture password in swift
 
