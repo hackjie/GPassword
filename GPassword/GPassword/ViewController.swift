@@ -77,9 +77,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             vc.type = .modify
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 3 {
-
+            GPassword.openTrack()
         } else if indexPath.row == 4 {
-
+            GPassword.closeTrack()
         }
     }
 }
