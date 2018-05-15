@@ -39,6 +39,8 @@ CocoaPods
 pod "GPassword"
 ```
 
+or you can drag Source folder into your project.
+
 ## Usage
 
 First custom UI style, here is what you need:
