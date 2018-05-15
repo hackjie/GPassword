@@ -1,6 +1,7 @@
 os: osx
 language: swift
-osx_image: xcode9
+osx_image: xcode9.
+xcode_project: GPassword/GPassword.xcodeproj
 branches:
   only:
   - master
