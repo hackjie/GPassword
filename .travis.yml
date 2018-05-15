@@ -1,7 +1,7 @@
 os: osx
 language: swift
 osx_image: xcode9.2
-xcode_project: GPassword/GPassword.xcodeproj
+xcode_project: /Users/leoli/Desktop/workspace/git/GPassword/GPassword/GPassword.xcodeproj
 branches:
   only:
   - master
