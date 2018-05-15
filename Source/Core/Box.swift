@@ -1,6 +1,6 @@
 //
 //  Box.swift
-//  Box
+//  GPassword
 //
 //  Created by Jie Li on 27/4/18.
 //

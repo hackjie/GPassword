@@ -1,6 +1,6 @@
 //
 //  Point.swift
-//  Point
+//  GPassword
 //
 //  Created by Jie Li on 8/5/18.
 //

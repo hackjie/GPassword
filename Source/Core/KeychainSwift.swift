@@ -1,6 +1,6 @@
 //
-//  Point.swift
-//  Point
+//  KeychainSwift.swift
+//  GPassword
 //
 //  Created by Jie Li on 10/5/18.
 //

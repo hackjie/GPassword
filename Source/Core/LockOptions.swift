@@ -1,5 +1,5 @@
 //
-//  GPassword.swift
+//  LockOptions.swift
 //  GPassword
 //
 //  Created by Jie Li on 26/4/18.

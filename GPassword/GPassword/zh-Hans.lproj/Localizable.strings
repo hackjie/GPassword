@@ -13,3 +13,4 @@
 "once_input_confirm"     = "再次输入以确认";
 "two_input_different"    = "密码不一致, 请重新设置";
 "password_input_error"   = "密码错误, 你还可以输入";
+"input_origin_password"  = "请输入原手势密码";

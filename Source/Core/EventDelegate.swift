@@ -1,6 +1,6 @@
 //
-//  Point.swift
-//  Point
+//  EventDelegate.swift
+//  GPassword
 //
 //  Created by Jie Li on 10/5/18.
 //

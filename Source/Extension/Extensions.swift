@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  Extensions
+//  GPassword
 //
 //  Created by Jie Li on 26/4/18.
 //

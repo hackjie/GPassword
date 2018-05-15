@@ -12,4 +12,5 @@
 "setting_password_title" = "Please input gesture password";
 "once_input_confirm"     = "Please input again to confirm";
 "two_input_different"    = "Passwords different, Please re-set";
-"password_input_error"   = "error password, can input";
+"password_input_error"   = "Error password, can input";
+"input_origin_password"  = "Please input origin password";
