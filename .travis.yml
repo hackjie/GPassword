@@ -1,0 +1,8 @@
+language: swift
+osx_image: xcode9
+branches:
+  only:
+  - master
+
+script:
+  - xcodebuild -scheme GPassword -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=11.2' build test
