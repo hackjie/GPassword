@@ -1,6 +1,6 @@
 # GPassword
 
-![GPassword](https://github.com/hackjie/GPassword/blob/master/Resources/GPassword.png)
+![GPassword](https://github.com/hackjie/GPassword/blob/master/Resources/GPassword-logo.png)
 
 [![](https://travis-ci.org/hackjie/GPassword.svg?branch=master)](https://travis-ci.org/hackjie/GPassword)
 ![](https://img.shields.io/badge/language-swift-orange.svg)
