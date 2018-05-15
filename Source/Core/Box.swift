@@ -39,10 +39,10 @@ open class Box: UIView {
     /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
 
-    var delegate: EventDelegate?
+    public var delegate: EventDelegate?
 
     // MARK: - Lifecycle
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = globalOptions.boxBackgroundColor
         setupSubViews()
