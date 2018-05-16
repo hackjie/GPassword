@@ -7,6 +7,8 @@
 ![](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
+中文版本请看[这里](https://github.com/hackjie/GPassword/wiki/GPassword)
+
 Simple gesture password in swift
 
 ## Features
