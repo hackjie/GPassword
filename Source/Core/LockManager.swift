@@ -32,53 +32,54 @@ class LockManager {
     static let `default`: LockManager = {
         return LockManager()
     }()
-    
+
     private init() {}
-    
+
     /// Options for gesture password
     var options = LockOptions()
-    
-    /// KeyChain for manage gesture password
-    var keyChain = KeychainSwift()
-    
+
+    /// Storage for manage gesture password
+    var storage: Storage = KeychainSwift()
+
     /// Save String item with key
     ///
     /// - Parameters:
     ///   - password: String
     ///   - key: String
     func save(string item: String, with key: String) {
-        keyChain.set(item, forKey: key)
+        storage.gp_set(item, with: key)
     }
-    
+
     /// Get String item with key
     ///
     /// - Parameter key: String
     /// - Returns: String Optional
     func getStringItem(with key: String) -> String? {
-        return keyChain.get(key)
+        return storage.gp_get(with: key)
     }
-    
+
     /// Save Bool item with key
     ///
     /// - Parameters:
     ///   - item: Bool
     ///   - key: String
     func save(bool item: Bool, with key: String) {
-        keyChain.set(item, forKey: key)
+        storage.gp_setBool(item, with: key)
     }
-    
+
     /// Get Bool item with key
     ///
     /// - Parameter key: String
     /// - Returns: Bool Optional
     func getBoolItem(with key: String) -> Bool? {
-        return keyChain.getBool(key)
+        return storage.gp_getBool(with: key)
     }
-    
+
     /// Remove item with key
     ///
     /// - Parameter key: String
     func removeItem(with key: String) {
-        keyChain.delete(key)
+        storage.gp_remove(with: key)
     }
 }
+

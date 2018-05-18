@@ -96,20 +96,36 @@ public class LockOptions {
 
     /// Offset between inner circle and triangle
     public var offsetInnerCircleAndTriangle: CGFloat = 4
-
-    /// Enum about draw connect line start from center or border
-    public enum LineStart {
-        case center, border
-    }
-
-    /// Enum about Point normal style
-    public enum NormalStyle {
-        case innerFill, outerStroke
-    }
     
     /// Key for saving whether show points selected
     public var trackKey = "track_key"
     
     /// Used to verify and modify
     public var maxErrorNum: Int = 5
+
+    /// Store type
+    public var storeType: StoreType = .userDefault {
+        willSet {
+            if storeType == .userDefault {
+                LockManager.default.storage = UserDefaults()
+            } else {
+                LockManager.default.storage = KeychainSwift()
+            }
+        }
+    }
+}
+
+/// Enum about draw connect line start from center or border
+public enum LineStart {
+    case center, border
+}
+
+/// Enum about Point normal style
+public enum NormalStyle {
+    case innerFill, outerStroke
+}
+
+/// Enum about store tool
+public enum StoreType {
+    case keyChain, userDefault
 }

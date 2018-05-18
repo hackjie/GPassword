@@ -17,7 +17,7 @@ Simple gesture password in swift
 * Use CAShapeLayer、UIBezeierPath to draw for good performance
 * Support define `3*3`、`4*4`... Matrix
 * Support define many kinds of normal and selected style
-* Use KeyChain to save informations
+* Use KeyChain and UserDefaults to save informations
 
 ## Screenshots
 

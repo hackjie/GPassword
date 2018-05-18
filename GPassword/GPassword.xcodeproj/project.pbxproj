@@ -10,6 +10,7 @@
 		B612008F20A594AD003906D1 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612008E20A594AD003906D1 /* KeychainSwift.swift */; };
 		B612009120A59C0E003906D1 /* LockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612009020A59C0E003906D1 /* LockManager.swift */; };
 		B612009820A93CB4003906D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B612009A20A93CB4003906D1 /* Localizable.strings */; };
+		B615A3AD20AED54700BF1FE6 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615A3AC20AED54700BF1FE6 /* Storage.swift */; };
 		B64A2C1C20A0449B00B17B43 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A2C1B20A0449B00B17B43 /* Point.swift */; };
 		B65C003620A4262C008388A1 /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65C003520A4262C008388A1 /* EventDelegate.swift */; };
 		B65C004C20A43BF9008388A1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65C004B20A43BF9008388A1 /* PasswordViewController.swift */; };
@@ -33,6 +34,7 @@
 		B612009520A93C73003906D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B612009920A93CB4003906D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B612009B20A93CB7003906D1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B615A3AC20AED54700BF1FE6 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		B64A2C1B20A0449B00B17B43 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		B65C003520A4262C008388A1 /* EventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		B65C004B20A43BF9008388A1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B615A3AB20AED53100BF1FE6 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				B612008E20A594AD003906D1 /* KeychainSwift.swift */,
+				B615A3AC20AED54700BF1FE6 /* Storage.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		B662A3042093393F00C7418F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,9 +114,10 @@
 		B685CC062091B9550072C4E7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B685CC0A2091C5CD0072C4E7 /* Core */,
+				B615A3AB20AED53100BF1FE6 /* Store */,
 				B685CC072091B9550072C4E7 /* GPassword.swift */,
 				B662A3042093393F00C7418F /* Extension */,
-				B685CC0A2091C5CD0072C4E7 /* Core */,
 			);
 			name = Source;
 			path = ../Source;
@@ -119,7 +131,6 @@
 				B6E79DD72094567C00DB69B5 /* Box.swift */,
 				B64A2C1B20A0449B00B17B43 /* Point.swift */,
 				B65C003520A4262C008388A1 /* EventDelegate.swift */,
-				B612008E20A594AD003906D1 /* KeychainSwift.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -202,6 +213,7 @@
 				B662A308209339E100C7418F /* Extensions.swift in Sources */,
 				B685CBF72091B9470072C4E7 /* ViewController.swift in Sources */,
 				B612009120A59C0E003906D1 /* LockManager.swift in Sources */,
+				B615A3AD20AED54700BF1FE6 /* Storage.swift in Sources */,
 				B64A2C1C20A0449B00B17B43 /* Point.swift in Sources */,
 				B6E79DD82094567C00DB69B5 /* Box.swift in Sources */,
 				B685CC0E2091CF050072C4E7 /* LockOptions.swift in Sources */,

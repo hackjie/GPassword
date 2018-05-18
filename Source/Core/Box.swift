@@ -128,14 +128,14 @@ open class Box: UIView {
         if let point = point(by: location), !points.contains(point) {
             points.append(point)
             calAngle()
-            if GPassword.hasOpenTrack() == nil || GPassword.hasOpenTrack() == true {
+            if hasOpenTrack() == nil || hasOpenTrack() == true {
                 point.selected = true
             }
             // send touch point to delegate
             guard let delegate = self.delegate else { return }
             delegate.sendTouchPoint(with: "\(point.tag)")
         }
-        if GPassword.hasOpenTrack() == nil || GPassword.hasOpenTrack() == true {
+        if hasOpenTrack() == nil || hasOpenTrack() == true {
             drawLines()
         }
     }
