@@ -54,7 +54,7 @@ class WarnLabel: UILabel {
     func showWarn(with message: String) {
         text = message
         textColor = UIColor(gpRGB: 0xC94349)
-        layer.shake()
+        layer.gp_shake()
     }
 }
 
