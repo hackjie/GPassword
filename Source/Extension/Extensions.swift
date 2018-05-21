@@ -28,7 +28,7 @@ import UIKit
 
 // MARK: - UIColor
 extension UIColor {
-    convenience init(gpRGB: UInt, alpha: CGFloat = 1.0) {
+    convenience public init(gpRGB: UInt, alpha: CGFloat = 1.0) {
         self.init(
             red: CGFloat((gpRGB & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((gpRGB & 0x00FF00) >> 8) / 255.0,
@@ -40,7 +40,7 @@ extension UIColor {
 
 // MARK: - CALayer
 extension CALayer {
-    func shake() {
+    public func gp_shake() {
         let keyFrameAnimation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         let s = 16
         keyFrameAnimation.values = [0, s, -s, 0]
@@ -52,7 +52,7 @@ extension CALayer {
 
 // MARK: - String
 extension String {
-     static func gp_localized(_ key: String) -> String {
+     static public func gp_localized(_ key: String) -> String {
         return NSLocalizedString(key, comment: "")
     }
 }
