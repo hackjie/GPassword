@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GPassword"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "Simple gesture password in swift."
   s.description  = <<-DESC
   This framework help you build your gesture password easily!

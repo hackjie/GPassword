@@ -118,13 +118,14 @@ class PasswordViewController: UIViewController {
             options.isDrawTriangle = false
             options.connectLineWidth = 4
             options.matrixNum = 3
+            options.keySuffix = "leoli"
         }
 
         view.addSubview(passwordBox)
         view.addSubview(warnLabel)
         view.addSubview(LoginBtn)
 
-        print(GPassword.getPassword(with: passwordKey) ?? "")
+        print(GPassword.getPassword() ?? "")
     }
 }
 
@@ -144,7 +145,7 @@ extension PasswordViewController: EventDelegate {
             if type == .set {
                 setPassword()
             } else if type == .modify {
-                let savePassword = GPassword.getPassword(with: passwordKey)
+                let savePassword = GPassword.getPassword()
                 if let pass = savePassword {
                     if canModify {
                         setPassword()
@@ -158,7 +159,7 @@ extension PasswordViewController: EventDelegate {
                     }
                 }
             } else {
-                let savePassword = GPassword.getPassword(with: passwordKey) ?? ""
+                let savePassword = GPassword.getPassword() ?? ""
                 if password == savePassword {
                     navigationController?.popViewController(animated: true)
                 } else {
@@ -179,7 +180,7 @@ extension PasswordViewController {
         } else {
             secondPassword = password
             if firstPassword == secondPassword {
-                GPassword.save(password: firstPassword, with: passwordKey)
+                GPassword.save(password: firstPassword)
                 navigationController?.popViewController(animated: true)
             } else {
                 warnLabel.showWarn(with: String.gp_localized("two_input_different"))
@@ -193,8 +194,8 @@ extension PasswordViewController {
     }
 
     func verifyPasswordError() {
-        GPassword.increaseErrorNum(with: errorPasswordKey)
-        let errorNum = globalOptions.maxErrorNum - GPassword.getErrorNum(with: errorPasswordKey)!
+        GPassword.increaseErrorNum()
+        let errorNum = globalOptions.maxErrorNum - GPassword.getErrorNum()!
         if errorNum == 0 {
             // do action about forgetting password
             warnLabel.showWarn(with: String.gp_localized("forget_password_title"))
@@ -222,4 +223,3 @@ extension PasswordViewController {
         }
     }
 }
-

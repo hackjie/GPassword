@@ -26,6 +26,15 @@
 
 import UIKit
 
+/// Key for password
+let PASSWORD_KEY      = "gesture_password_key_"
+/// Key for control gesture password open or close
+let CONTROL_KEY       = "gesture_control_"
+/// Key for control gesture password track open or close
+let CONTROL_TRACK_KEY = "gesture_conroltrack_"
+/// Key for record error num
+let ERROR_NUM_KEY     = "gesture_error_"
+
 /// Responsible for manage gesture password
 class LockManager {
     /// Singleton
@@ -82,4 +91,3 @@ class LockManager {
         storage.gp_remove(with: key)
     }
 }
-

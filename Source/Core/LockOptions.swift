@@ -97,8 +97,9 @@ public class LockOptions {
     /// Offset between inner circle and triangle
     public var offsetInnerCircleAndTriangle: CGFloat = 4
     
-    /// Key for saving whether show points selected
-    public var trackKey = "track_key"
+    /// Suffix of key, for supporting muti accounts
+    /// if you want to support muti accounts, you should first set it at config method
+    public var keySuffix = ""
     
     /// Used to verify and modify
     public var maxErrorNum: Int = 5

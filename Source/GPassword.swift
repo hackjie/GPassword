@@ -43,48 +43,39 @@ public func config(_ config: ConfigOptionsCompletion) {
 ///
 /// - Parameters:
 ///   - password: String
-///   - key: String
-public func save(password: String, with key: String) {
-    LockManager.default.save(string: password, with: key)
+public func save(password: String) {
+    LockManager.default.save(string: password, with: PASSWORD_KEY + globalOptions.keySuffix)
 }
 
 /// Remove Password
-///
-/// - Parameter key: String
-public func removePassword(with key: String) {
-    LockManager.default.removeItem(with: key)
+public func removePassword() {
+    LockManager.default.removeItem(with: PASSWORD_KEY + globalOptions.keySuffix)
 }
 
 /// Get Password
 ///
-/// - Parameter key: String
 /// - Returns: String Optional
-public func getPassword(with key: String) -> String? {
-    return LockManager.default.getStringItem(with: key)
+public func getPassword() -> String? {
+    return LockManager.default.getStringItem(with: PASSWORD_KEY + globalOptions.keySuffix)
 }
 
 // MARK: - Control gesture open close
 
 /// Whether open gesture password
 ///
-/// - Parameter key: String
 /// - Returns: Bool Optional
-public func hasOpenGesture(with key: String) -> Bool? {
-    return LockManager.default.getBoolItem(with: key)
+public func hasOpenGesture() -> Bool? {
+    return LockManager.default.getBoolItem(with: CONTROL_KEY + globalOptions.keySuffix)
 }
 
 /// Open gesture password
-///
-/// - Parameter key: String
-public func openGesture(with key: String) {
-    LockManager.default.save(bool: true, with: key)
+public func openGesture() {
+    LockManager.default.save(bool: true, with: CONTROL_KEY + globalOptions.keySuffix)
 }
 
 /// Close gesture password
-///
-/// - Parameter key: String
-public func closeGesture(with key: String) {
-    LockManager.default.save(bool: false, with: key)
+public func closeGesture() {
+    LockManager.default.save(bool: false, with: CONTROL_KEY + globalOptions.keySuffix)
 }
 
 // MARK: - Control show selected-track or not
@@ -93,28 +84,26 @@ public func closeGesture(with key: String) {
 ///
 /// - Returns: Bool Optional
 public func hasOpenTrack() -> Bool? {
-    return LockManager.default.getBoolItem(with: globalOptions.trackKey)
+    return LockManager.default.getBoolItem(with: CONTROL_TRACK_KEY + globalOptions.keySuffix)
 }
 
 /// Show points selected
 public func openTrack() {
-    LockManager.default.save(bool: true, with: globalOptions.trackKey)
+    LockManager.default.save(bool: true, with: CONTROL_TRACK_KEY + globalOptions.keySuffix)
 }
 
 /// Hide points selected
 public func closeTrack() {
-    LockManager.default.save(bool: false, with: globalOptions.trackKey)
+    LockManager.default.save(bool: false, with: CONTROL_TRACK_KEY + globalOptions.keySuffix)
 }
 
 // MARK: - Max error num
 
 /// Increase error num
-///
-/// - Parameter key: String
-public func increaseErrorNum(with key: String) {
+public func increaseErrorNum() {
     var num = 0
-    
-    if let hasNum = getErrorNum(with: key), hasNum < globalOptions.maxErrorNum {
+    let key = ERROR_NUM_KEY + globalOptions.keySuffix
+    if let hasNum = getErrorNum(), hasNum < globalOptions.maxErrorNum {
         num = hasNum + 1
     } else {
         num = globalOptions.maxErrorNum
@@ -124,15 +113,14 @@ public func increaseErrorNum(with key: String) {
 
 /// Get error num
 ///
-/// - Parameter key: String
 /// - Returns: Int Optional
-public func getErrorNum(with key: String) -> Int? {
+public func getErrorNum() -> Int? {
+    let key = ERROR_NUM_KEY + globalOptions.keySuffix
     return Int(LockManager.default.getStringItem(with: key) ?? "0")
 }
 
 /// Remove error record
-///
-/// - Parameter key: String
-public func removeErrorNum(with key: String) {
+public func removeErrorNum() {
+    let key = ERROR_NUM_KEY + globalOptions.keySuffix
     LockManager.default.removeItem(with: key)
 }
