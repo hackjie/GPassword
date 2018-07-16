@@ -7,28 +7,18 @@
 ![](https://img.shields.io/badge/platform-ios-lightgrey.svg)
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 
-English info please see [here](https://github.com/hackjie/GPassword/wiki/GPassword)
+Simple gesture password in swift
+中文版本参考[这里](https://github.com/hackjie/GPassword/wiki/GPassword)
 
-GPassword 是一个简单、高效、易用的`手势密码库`，基于 CAShapeLayer 和 UIBezeierPath。
+## Features
 
-## 重写手势密码(九宫格)的缘由
+* Use delegate for gesture view to pass password
+* Use CAShapeLayer、UIBezeierPath to draw for good performance
+* Support define `3*3`、`4*4`... Matrix
+* Support define many kinds of normal and selected style
+* Use KeyChain and UserDefaults to save informations
 
-* Swift 版现在 Github 上都比较难用，依据这些难用的改造的也不怎么好用～
-* 功能不大，但是涉及的东西挺有意思，我重写复习了下`三角函数和反三角函数`
-* 原有库使用重写 drawRect 在绘制时会造成内存暴涨
-* 原有库视图层级复杂造成额外不必要的代码逻辑
-* 原有库代码耦合严重、难于扩展
-* 封装手势密码`私有库`时，最后暴露出来的不应该是一个控制器，而应该是视图，要不然做界面定制将会很难做
-
-## 特性
-
-* 使用代理将手势密码图绘制完成的密码传出
-* 使用 CAShapeLayer 和 UIBezeierPath，拥有更好的性能
-* 支持定义 `3*3`、`4*4`...的矩阵
-* 支持多种正常和选中的样式
-* 使用 KeyChain 和 UserDefaults 来存储相关信息
-
-## 部分截图展示
+## Screenshots
 
 <p align="center">
     <img src="https://github.com/hackjie/GPassword/blob/master/Resources/first.gif" width="30%" />
@@ -36,13 +26,13 @@ GPassword 是一个简单、高效、易用的`手势密码库`，基于 CAShape
     <img src="https://github.com/hackjie/GPassword/blob/master/Resources/third.gif" width="30%" />
 </p>
 
-## 要求
+## Requirements
 
 * iOS 8.0+
 * Xcode 9.0+
 * Swift 4.0+
 
-## 安装
+## Install
 
 CocoaPods
 
@@ -50,11 +40,11 @@ CocoaPods
 pod "GPassword"
 ```
 
-或者直接拖拽 `Source` 文件夹进入你的项目。
+or you can drag Source folder into your project.
 
-## 使用
+## Usage
 
-定义统一的样式，你可以调用：
+First custom UI style, here is what you need:
 
 ```swift
 GPassword.config { (options) in
@@ -65,7 +55,7 @@ GPassword.config { (options) in
 }
 ```
 
-然后可以直接用这个文件 `Box.swift` 直接作为`手势密码`视图或者将它添加到`控制器`上使用
+then you can use `Box.swift` or add it to a UIViewController
 
 ```swift
 fileprivate lazy var passwordBox: Box = {
@@ -75,10 +65,7 @@ fileprivate lazy var passwordBox: Box = {
 }()
 ```
 
-然后需要做的就是实现两个代理方法，具体的业务逻辑也应该在里面实现：
-
-1. `sendTouchPoint` 可以从内部发出完整的手势密码
-2. `touchesEnded` 根据类型(设置/确认/修改)处理具体的业务逻辑
+then you need to achieve two delegate methods, you should write business logics in them, `sendTouchPoint` can send out complete password and `touchesEnded` can deal business logics according to type(setting/verify/modify) 
 
 ```swift
 extension PasswordViewController: EventDelegate {
@@ -93,7 +80,7 @@ extension PasswordViewController: EventDelegate {
 }
 ```
 
-开发人可以根据自己的业务逻辑实现具体的细节，在 demo 里我已经写了一个简单的例子可以直接使用参考 `PasswordViewController.swift`，根据自己的情况进行调整。
+more informations you can see `PasswordViewController.swift` in demo project, I write an example.
 
 ## License
 
