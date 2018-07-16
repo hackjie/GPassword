@@ -13,8 +13,6 @@ GPassword 是一个简单、高效、易用的`手势密码库`，基于 CAShape
 
 ## 重写手势密码(九宫格)的缘由
 
-内部的库太难用，每次新开一个项目或者需求调整负责这块的开发人员很难受
-
 1. Swift 版现在 Github 上都比较难用，依据这些难用的改造的也不怎么好用～
 2. 功能不大，但是涉及的东西挺有意思，我重写复习了下`三角函数和反三角函数`
 3. 原有库使用重写 drawRect 在绘制时会造成内存暴涨
@@ -30,7 +28,7 @@ GPassword 是一个简单、高效、易用的`手势密码库`，基于 CAShape
 * 支持多种正常和选中的样式
 * 使用 KeyChain 和 UserDefaults 来存储相关信息
 
-## 截图
+## 部分截图展示
 
 <p align="center">
     <img src="https://github.com/hackjie/GPassword/blob/master/Resources/first.gif" width="30%" />
