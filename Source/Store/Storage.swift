@@ -53,7 +53,9 @@ extension UserDefaults: Storage {
     }
 
     func gp_getBool(with key: String) -> Bool? {
-        return self.bool(forKey: key)
+        // do not call self.bool(forKey: key), if the key not set,
+        // this method will return false, not nil
+        return self.object(forKey: key) as? Bool
     }
 
     func gp_remove(with key: String) {

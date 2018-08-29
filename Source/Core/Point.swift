@@ -96,7 +96,7 @@ class Point: CAShapeLayer {
         let sizeWH = bounds.width - 2 * globalOptions.pointLineWidth
         let originXY = globalOptions.pointLineWidth
         let rect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
-        let outer = Shape(fillColor: .white,
+        let outer = Shape(fillColor: globalOptions.outerNormalColor,
                           rect: rect,
                           stroke: globalOptions.isOuterStroke,
                           strokeColor: globalOptions.outerStrokeColor)
