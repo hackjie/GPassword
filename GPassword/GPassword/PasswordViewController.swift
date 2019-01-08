@@ -107,6 +107,10 @@ class PasswordViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    deinit {
+        print("deinit")
+    }
 
     // MARK: - layout
     func setupSubviews() {
@@ -129,7 +133,7 @@ class PasswordViewController: UIViewController {
     }
 }
 
-extension PasswordViewController: EventDelegate {
+extension PasswordViewController: GPasswordEventDelegate {
     func sendTouchPoint(with tag: String) {
         print(tag)
         password += tag

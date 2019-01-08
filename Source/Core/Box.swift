@@ -39,7 +39,7 @@ open class Box: UIView {
     /// Connect line
     fileprivate var lineLayer = CAShapeLayer()
 
-    public var delegate: EventDelegate?
+    public weak var delegate: GPasswordEventDelegate?
 
     // MARK: - Lifecycle
     override public init(frame: CGRect) {
