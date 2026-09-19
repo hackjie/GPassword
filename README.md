@@ -1,3 +1,5 @@
+
+
 # GPassword
 
 ![GPassword](https://github.com/hackjie/GPassword/blob/master/Resources/GPassword-logo.png)
@@ -69,7 +71,7 @@ fileprivate lazy var passwordBox: Box = {
 then you need to achieve two delegate methods, you should write business logics in them, `sendTouchPoint` can send out complete password and `touchesEnded` can deal business logics according to type(setting/verify/modify) 
 
 ```swift
-extension PasswordViewController: EventDelegate {
+extension PasswordViewController: GPasswordEventDelegate {
     func sendTouchPoint(with tag: String) {
         password += tag
         // get complete password
@@ -86,6 +88,3 @@ more informations you can see `PasswordViewController.swift` in demo project, I 
 ## License
 
 GPassword is released under the MIT license. [See LICENSE](https://github.com/hackjie/GPassword/blob/master/LICENSE) for details
-
-
-
