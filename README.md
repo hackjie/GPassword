@@ -58,7 +58,33 @@ The package includes only `Source/**/*.swift`. The demo app, its storyboards and
 
 ### Manual integration
 
-You can still drag the `Source` folder into your project.
+Drag the `Source` folder into your project, copy the files if needed, and select your iOS app target under **Add to targets**. Check that all nine Swift files appear in the app target's **Build Phases > Compile Sources**.
+
+Copied source is compiled into your app's module; it does not create a separate `GPassword` module. Do not write `import GPassword`, and call the top-level functions without the `GPassword.` prefix:
+
+```swift
+import UIKit
+
+// Run UI setup on the main thread.
+config { options in
+    options.matrixNum = 3
+    options.normalstyle = .innerFill
+}
+
+let box = Box(frame: CGRect(x: 20, y: 100, width: 280, height: 280))
+// Add box to your view and assign a GPasswordEventDelegate.
+```
+
+### Troubleshooting: No such module 'GPassword'
+
+[Issue #3](https://github.com/hackjie/GPassword/issues/3) reports this error after dragging `Source` into an app. For manual integration, remove `import GPassword` from the consuming code and remove the `GPassword.` prefix from library function calls, such as `config`, `getPassword`, and `openTrack`. The demo app is itself named `GPassword`, so its module-qualified calls are not directly portable to an app with a different module name. `GPassword.swift` contains top-level functions, not a class named `GPassword`.
+
+If you intend to use an independent library module instead, integrate through CocoaPods or SwiftPM and keep `import GPassword`:
+
+* **CocoaPods:** run `pod install`, open the generated `.xcworkspace`, and confirm that the Pod is included for the correct app target and build configuration.
+* **SwiftPM:** choose a revision containing `Package.swift`, add the `GPassword` product to the correct app target, and inspect any earlier package build errors. The historical `1.0.9` tag does not contain the manifest.
+
+Choose one integration method for each app target. These steps explain the module setup; the original reporter's project and an Xcode 11 reproduction are not available, so a successful build of that project has not been verified.
 
 ### Validating SwiftPM support
 
